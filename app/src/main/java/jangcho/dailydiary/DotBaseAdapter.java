@@ -1,6 +1,7 @@
 package jangcho.dailydiary;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,16 +48,19 @@ public class DotBaseAdapter extends BaseAdapter{
 
         if(mData.get(position).isDB){
             View itemLayout1 = mLayoutInflater.inflate(R.layout.content_view_layout,null);
+            Util.setGlobalFont(mContext, itemLayout1);
+
             TextView content_content = (TextView) itemLayout1.findViewById(R.id.content_content);
             TextView content_week = (TextView) itemLayout1.findViewById(R.id.content_week);
             TextView content_day = (TextView) itemLayout1.findViewById(R.id.content_day);
+
 
             content_content.setText(mData.get(position).tempContent);
             content_day.setText(""+mData.get(position).tempDay);
 
             String mweek = "";
             switch(mData.get(position).tempWeek){
-                case 1: mweek = "Sun"; break;
+                case 1: mweek = "Sun"; content_week.setTextColor(Color.parseColor("#ff0000")); break;
                 case 2: mweek = "Mon"; break;
                 case 3: mweek = "Tue"; break;
                 case 4: mweek = "Wed"; break;
@@ -72,10 +76,11 @@ public class DotBaseAdapter extends BaseAdapter{
             return itemLayout1;
         }else {
             View itemLayout = mLayoutInflater.inflate(R.layout.dot_view_item_layout, null);
+
             ImageView Ib = (ImageView) itemLayout.findViewById(R.id.circle);
 
             if (mData.get(position).tempWeek == 1) {
-                Ib.setImageResource(R.drawable.redcircle);
+                Ib.setImageResource(R.drawable.redpencil);
 
             }
             return itemLayout;

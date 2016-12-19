@@ -1,12 +1,7 @@
 package jangcho.dailydiary;
 
 import android.app.Activity;
-import android.app.AlarmManager;
 import android.app.AlertDialog;
-import android.app.PendingIntent;
-import android.app.TimePickerDialog;
-import android.content.ContentValues;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -24,7 +19,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TimePicker;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -47,11 +41,7 @@ public class MainActivity extends Activity {
     Button b_alphabutt =null;
     Animation ani = null;
     boolean islineclick =false;     //선모양 버튼이 눌렸는지?
-    String city = "";
 
-
-    ImageView weather = null;
-    AnimationDrawable frameAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +51,8 @@ public class MainActivity extends Activity {
         setTheme(android.R.style.Theme_DeviceDefault_NoActionBar_Fullscreen);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+        Util.setGlobalFont(this, getWindow().getDecorView());
+
 
         islineclick=false;
         mTimeDB = TimeDB.getInstance(this);
@@ -236,53 +228,57 @@ public class MainActivity extends Activity {
             mAdapter.notifyDataSetChanged();
 
 
-        }else{
+        }else {
             mData.clear();
-            Calendar oCalendar = Calendar.getInstance();
 
-            if(curYear==todayYear && curMonth==todayMonth){
-                curDay = todayDay;
+            if (curYear > todayYear) {
+
+            } else {
+                Calendar oCalendar = Calendar.getInstance();
+                if (curYear == todayYear && curMonth == todayMonth) {
+                    curDay = todayDay;
+                }
+                oCalendar.set(Calendar.YEAR, curYear);
+                oCalendar.set(Calendar.MONTH, curMonth - 1);
+                oCalendar.set(Calendar.DATE, curDay);
+                curWeek = oCalendar.get(Calendar.DAY_OF_WEEK);
+
+                for (int i = curDay; i > 0; i--) {
+                    Data data = new Data();
+                    data.tempYear = curYear;
+                    data.tempMonth = curMonth;
+                    data.tempDay = i;
+                    data.tempWeek = curWeek;
+                    curWeek--;
+                    if (curWeek == 0) {
+                        curWeek = 7;
+                    }
+                    String[] columns = new String[]{"content"};
+                    String[] temp = {"" + data.tempYear, "" + data.tempMonth, "" + i};
+                    Cursor c = mTimeDB.query(columns, "year = ? AND month =? AND day = ? ", temp, null, null, null);
+                    if (c != null && c.getCount() != 0) {
+                        data.isDB = true;
+                        c.moveToFirst();
+                        data.tempContent = c.getString(0);
+
+                    }
+                    c.close();
+
+
+                    mData.add(0, data);
+
+
+                }
+                mListView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mListView.setSelection(mListView.getCount() - 1);
+                    }
+                });
+                mAdapter.notifyDataSetChanged();
+
+
             }
-            oCalendar.set(Calendar.YEAR,curYear);
-            oCalendar.set(Calendar.MONTH,curMonth-1);
-            oCalendar.set(Calendar.DATE,curDay);
-            curWeek = oCalendar.get(Calendar.DAY_OF_WEEK);
-
-            for (int i = curDay; i > 0; i--) {
-                Data data = new Data();
-                data.tempYear = curYear;
-                data.tempMonth = curMonth;
-                data.tempDay = i;
-                data.tempWeek = curWeek;
-                curWeek--;
-                if (curWeek == 0) {
-                    curWeek = 7;
-                }
-                String[] columns = new String[]{"content"};
-                String[] temp = {""+data.tempYear,""+data.tempMonth,""+i};
-                Cursor c = mTimeDB.query(columns ,"year = ? AND month =? AND day = ? ",temp,null,null,null);
-                if(c != null && c.getCount()!=0){
-                    data.isDB = true;
-                    c.moveToFirst();
-                    data.tempContent = c.getString(0);
-
-                }
-                c.close();
-
-
-                mData.add(0, data);
-
-
-            }
-            mListView.post(new Runnable() {
-                @Override
-                public void run() {
-                    mListView.setSelection(mListView.getCount()-1);
-                }
-            });
-            mAdapter.notifyDataSetChanged();
-
-
         }
 
     }
@@ -430,6 +426,8 @@ public class MainActivity extends Activity {
         mhori.setVisibility(View.GONE);
         lin.setVisibility(View.VISIBLE);
     }   //하단 월 horizontalscroll이 visible 됐을대
+
+
 
 
 }

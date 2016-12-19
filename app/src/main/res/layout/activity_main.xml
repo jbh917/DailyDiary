@@ -32,8 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/linear"
-            android:visibility="visible"
-            android:padding="5dp">
+            android:visibility="visible">
 
             <ImageButton
                 android:layout_width="match_parent"
@@ -43,7 +42,7 @@
                 android:src="@drawable/dec2"
                 android:id="@+id/main_month"
                 android:onClick="onClick"
-                android:padding="5dp"
+                android:padding="10dp"
                 android:layout_weight="1"
                 />
 
@@ -62,7 +61,7 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerInside"
                 android:background="#ffffff"
-                android:src="@drawable/cross"
+                android:src="@drawable/writetoday"
                 android:id="@+id/cross"
                 android:onClick="onClick"
                 android:padding="5dp"
@@ -75,6 +74,7 @@
                 android:src="@drawable/line"
                 android:id ="@+id/line"
                 android:background="#ffffff"
+                android:padding="5dp"
                 android:onClick="onClick"
                 />
 
@@ -107,135 +107,135 @@
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:scaleType="centerInside"
                     android:background="#ffffff"
                     android:src="@drawable/jan2"
                     android:id="@+id/jan"
                     android:onClick="onClick1"
-                    android:padding="5dp"
+                    android:padding="15dp"
                     />
 
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:scaleType="centerInside"
                     android:background="#ffffff"
                     android:src="@drawable/feb2"
                     android:id="@+id/feb"
                     android:onClick="onClick1"
-                    android:padding="5dp"
+                    android:padding="15dp"
                     />
 
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:scaleType="centerInside"
                     android:background="#ffffff"
                     android:src="@drawable/mar2"
                     android:id="@+id/mar"
                     android:onClick="onClick1"
-                    android:padding="5dp"
+                    android:padding="15dp"
                     />
 
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:scaleType="centerInside"
                     android:background="#ffffff"
                     android:src="@drawable/apr2"
                     android:id="@+id/apr"
                     android:onClick="onClick1"
-                    android:padding="5dp"
+                    android:padding="15dp"
                     />
 
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:scaleType="centerInside"
                     android:background="#ffffff"
                     android:src="@drawable/may2"
                     android:id="@+id/may"
                     android:onClick="onClick1"
-                    android:padding="5dp"
+                    android:padding="15dp"
                     />
 
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:scaleType="centerInside"
                     android:background="#ffffff"
                     android:src="@drawable/jun2"
                     android:id="@+id/jun"
                     android:onClick="onClick1"
-                    android:padding="5dp"
+                    android:padding="15dp"
                     />
 
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:scaleType="centerInside"
                     android:background="#ffffff"
                     android:src="@drawable/jul2"
                     android:id="@+id/july"
                     android:onClick="onClick1"
-                    android:padding="5dp"
+                    android:padding="15dp"
                     />
 
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:scaleType="centerInside"
                     android:background="#ffffff"
                     android:src="@drawable/aug2"
                     android:id="@+id/aug"
                     android:onClick="onClick1"
-                    android:padding="5dp"
+                    android:padding="15dp"
                     />
 
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:scaleType="centerInside"
                     android:background="#ffffff"
                     android:src="@drawable/sep2"
                     android:id="@+id/sep"
                     android:onClick="onClick1"
-                    android:padding="5dp"
+                    android:padding="15dp"
                     />
 
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:scaleType="centerInside"
                     android:background="#ffffff"
                     android:src="@drawable/oct2"
                     android:id="@+id/oct"
                     android:onClick="onClick1"
-                    android:padding="5dp"
+                    android:padding="15dp"
                     />
 
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:scaleType="centerInside"
                     android:background="#ffffff"
                     android:src="@drawable/nov2"
                     android:id="@+id/nov"
                     android:onClick="onClick1"
-                    android:padding="5dp"
+                    android:padding="15dp"
                     />
 
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:scaleType="centerInside"
                     android:background="#ffffff"
                     android:src="@drawable/dec2"
                     android:id="@+id/dec"
                     android:onClick="onClick1"
-                    android:padding="5dp"
+                    android:padding="15dp"
                     />
 
 
