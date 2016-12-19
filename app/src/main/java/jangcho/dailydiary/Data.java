@@ -9,4 +9,3 @@ public class Data {
     boolean isDB = false;
     String tempContent = "";
 }
-
