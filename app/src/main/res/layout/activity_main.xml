@@ -10,5 +10,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="jangcho.dailydiary.MainActivity">
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:id="@+id/btn"
+        android:onClick="onClick" />
 
 </RelativeLayout>
