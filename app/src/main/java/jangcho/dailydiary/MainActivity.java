@@ -42,17 +42,9 @@ public class MainActivity extends Activity {
         todayMonth = curMonth;
         todayYear = curYear;
 
-
-
-
         ///현재달에 맞게 점 그리기//////////
         oCalendar.set(Calendar.YEAR,curYear);
         oCalendar.set(Calendar.MONTH,curMonth-1);
         oCalendar.set(Calendar.DATE,curDay);
-
-
-
-
-
     }
 }
