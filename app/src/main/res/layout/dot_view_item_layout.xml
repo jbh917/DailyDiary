@@ -8,7 +8,7 @@
         android:layout_height="10dp"
         android:layout_gravity="center"
         android:background="#00000000"
-        android:src="@drawable/blackcircle"
+        android:src="@drawable/pencil"
         android:id="@+id/circle"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp"/>
