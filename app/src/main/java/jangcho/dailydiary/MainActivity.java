@@ -42,7 +42,7 @@ public class MainActivity extends Activity {
     ImageButton i_alphabutt = null;   //현재 깜빡이는 달
     Button b_alphabutt =null;
     Animation ani = null;
-    boolean islineclick =false;     //선모양 버튼이 눌렸는지?
+    boolean islineclick =false;     //선모양 버튼이 눌렸는지
 
 
     @Override
@@ -56,9 +56,16 @@ public class MainActivity extends Activity {
         Util.setGlobalFont(this, getWindow().getDecorView());
 
 
+        /******************************************************************************************/
+
+        MyAccount.setPencilCount(this, 100);
+        int pencil = (int)MyAccount.getValue(this, "CNT");
+        Log.e("pc", pencil+"");
+
+        /******************************************************************************************/
+
         islineclick=false;
         mTimeDB = TimeDB.getInstance(this);
-
 
         mData = new ArrayList<Data>();
         mhori = (HorizontalScrollView)findViewById(R.id.horizontal);
