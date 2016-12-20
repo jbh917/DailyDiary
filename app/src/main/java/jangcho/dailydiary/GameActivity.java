@@ -26,7 +26,6 @@ public class GameActivity extends Activity {
 
         number = (TextView) findViewById(R.id.counter);
 
-
         counter.start();
 
     }

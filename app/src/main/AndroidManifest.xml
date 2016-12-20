@@ -21,7 +21,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".GameActivity" android:theme="@android:style/Theme.Dialog"/>
         <activity android:name=".WDailyActivity"
             android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name=".RDailyActivity"
@@ -30,6 +29,8 @@
             android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name=".NewsActivity"
             android:windowSoftInputMode="adjustResize"></activity>
+        <activity android:name=".SettingDialog"
+            android:theme="@android:style/Theme.Dialog"></activity>
 
     </application>
 

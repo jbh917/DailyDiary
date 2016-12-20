@@ -49,8 +49,8 @@ public class WDailyActivity extends Activity {
         String mmonth ="";
         String mweek ="";
 
-        Util.setGlobalFont(this, getWindow().getDecorView());
-
+        String FONT_TYPE = (String)MyAccount.getValue(this, "FONT");
+        Util.setGlobalFont(this, getWindow().getDecorView(), FONT_TYPE);
 
         intent = getIntent();
 

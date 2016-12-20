@@ -43,7 +43,7 @@ public class MainActivity extends Activity {
     ImageButton i_alphabutt = null;   //현재 깜빡이는 달
     Button b_alphabutt =null;
     Animation ani = null;
-    boolean islineclick =false;     //선모양 버튼이 눌렸는지?
+    boolean islineclick =false;     //선모양 버튼이 눌렸는지
 
 
     @Override
@@ -54,7 +54,9 @@ public class MainActivity extends Activity {
         setTheme(android.R.style.Theme_DeviceDefault_NoActionBar_Fullscreen);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        Util.setGlobalFont(this, getWindow().getDecorView());
+
+        String FONT_TYPE = (String)MyAccount.getValue(this, "FONT");
+        Util.setGlobalFont(this, getWindow().getDecorView(), FONT_TYPE);
 
 
         islineclick=false;
@@ -300,8 +302,6 @@ public class MainActivity extends Activity {
     public void onClick(View v){
         switch(v.getId()){
             case R.id.main_month:{                          //하단 월 버튼 눌렀을 시
-
-
                 mhori.setVisibility(View.VISIBLE);
                 lin.setVisibility(View.GONE);
                 break;
@@ -311,9 +311,7 @@ public class MainActivity extends Activity {
                 ylin.setVisibility(View.VISIBLE);
                 break;
             }
-
             case R.id.cross:{
-
                 final Intent intent = new Intent(getApplicationContext(), RDailyActivity.class);
 
                 Calendar oCalendar = Calendar.getInstance();
@@ -353,10 +351,11 @@ public class MainActivity extends Activity {
                 banbok();
                 break;
             }
-
-            /////알람기능////////
-
-
+            case R.id.font: {
+                startActivity(new Intent(this, SettingDialog.class));
+                break;
+            }
+                /////알람기능////////
 
         }
 

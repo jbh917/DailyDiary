@@ -31,8 +31,8 @@ public class SearchActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_layout);
 
-        Util.setGlobalFont(this, getWindow().getDecorView());
-
+        String FONT_TYPE = (String)MyAccount.getValue(this, "FONT");
+        Util.setGlobalFont(this, getWindow().getDecorView(), FONT_TYPE);
 
         mData = new ArrayList<Data>();
         mTimeDB = TimeDB.getInstance(this);
