@@ -40,7 +40,9 @@ public class NewsActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.news_layout);
-        Util.setGlobalFont(this, getWindow().getDecorView());
+
+        String FONT_TYPE = (String)MyAccount.getValue(this, "FONT");
+        Util.setGlobalFont(this, getWindow().getDecorView(), FONT_TYPE);
 
         textView1 =(TextView)findViewById(R.id.news_1);
         textView2 =(TextView)findViewById(R.id.news_2);
