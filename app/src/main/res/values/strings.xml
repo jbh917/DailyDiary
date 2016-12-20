@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">DailyDiary</string>
+    <string name="font">FONT</string>
+    <string name="buy">USE ALL FONT</string>
+    <string name="cost">-56</string>
+
 </resources>

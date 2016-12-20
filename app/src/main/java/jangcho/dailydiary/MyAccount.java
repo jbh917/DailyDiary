@@ -3,15 +3,12 @@ package jangcho.dailydiary;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import static android.content.Context.MODE_PRIVATE;
-
 /**
  * Created by CHJ on 2016. 12. 20..
  */
 
 public class MyAccount {
 
-    //private SharedPreferences sharedPreferences;
     private static String PREF_NAME = "prefs";
 
     public MyAccount() {

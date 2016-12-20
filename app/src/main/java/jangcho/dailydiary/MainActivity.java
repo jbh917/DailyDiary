@@ -56,14 +56,6 @@ public class MainActivity extends Activity {
         Util.setGlobalFont(this, getWindow().getDecorView());
 
 
-        /******************************************************************************************/
-
-        MyAccount.setPencilCount(this, 100);
-        int pencil = (int)MyAccount.getValue(this, "CNT");
-        Log.e("pc", pencil+"");
-
-        /******************************************************************************************/
-
         islineclick=false;
         mTimeDB = TimeDB.getInstance(this);
 
@@ -305,9 +297,11 @@ public class MainActivity extends Activity {
         switch(v.getId()){
             case R.id.main_month:{                          //하단 월 버튼 눌렀을 시
 
+                startActivity(new Intent(this, SettingDialog.class));
 
-                mhori.setVisibility(View.VISIBLE);
-                lin.setVisibility(View.GONE);
+
+                //mhori.setVisibility(View.VISIBLE);
+                //lin.setVisibility(View.GONE);
                 break;
             }
             case R.id.main_year:{                       //하단 년 버튼 눌렀을 시
