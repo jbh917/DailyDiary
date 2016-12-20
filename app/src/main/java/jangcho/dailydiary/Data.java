@@ -6,6 +6,7 @@ package jangcho.dailydiary;
 
 public class Data {
     int tempYear=0, tempMonth=0, tempDay=0, tempHour=0, tempMinute=0, tempNoon=0, tempSecond=0, tempWeek=0;
+    int weather=0;
     boolean isDB = false;
     String tempContent = "";
 }

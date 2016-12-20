@@ -3,6 +3,7 @@ package jangcho.dailydiary;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.AnimationDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,10 +23,15 @@ public class DotBaseAdapter extends BaseAdapter{
     ArrayList<Data> mData =null;
     LayoutInflater mLayoutInflater =null;
 
+    ImageView weather = null;
+    AnimationDrawable frameAnimation;
+
+
     public DotBaseAdapter(Context context, ArrayList<Data> data){
         mContext = context;
         mData =data;
         mLayoutInflater = LayoutInflater.from(mContext);
+
     }
 
     @Override
@@ -54,6 +60,18 @@ public class DotBaseAdapter extends BaseAdapter{
             TextView content_week = (TextView) itemLayout1.findViewById(R.id.content_week);
             TextView content_day = (TextView) itemLayout1.findViewById(R.id.content_day);
 
+            weather = (ImageView)itemLayout1.findViewById(R.id.weather_ani);
+
+            switch(mData.get(position).weather){
+                case 0: weather.setBackgroundResource(R.drawable.sunny_animation); break;
+                case 1: weather.setBackgroundResource(R.drawable.cloud_animation); break;
+                case 2: weather.setBackgroundResource(R.drawable.smokycloud_animation); break;
+                case 3: weather.setBackgroundResource(R.drawable.rain_animation); break;
+                case 4: weather.setBackgroundResource(R.drawable.snow_animation); break;
+                case 5: weather.setBackgroundResource(R.drawable.snow_rain_animation); break;
+            }
+            frameAnimation = (AnimationDrawable)weather.getBackground();
+            frameAnimation.start();
 
             content_content.setText(mData.get(position).tempContent);
             content_day.setText(""+mData.get(position).tempDay);
