@@ -25,6 +25,9 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import com.unity3d.ads.IUnityAdsListener;
+import com.unity3d.ads.UnityAds;
+
 public class MainActivity extends Activity {
 
     int curYear, curMonth, curDay, curHour, curMinute, curNoon, curSecond, curWeek;     //현재 년,월,일,시간,분,낮밤,초,요일
@@ -45,6 +48,9 @@ public class MainActivity extends Activity {
     Animation ani = null;
     boolean islineclick =false;     //선모양 버튼이 눌렸는지
 
+    final String UNITYADS_KEY = "1239782";
+    final private UnityAdsListener unityAdsListener = new UnityAdsListener();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +61,11 @@ public class MainActivity extends Activity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+        UnityAds.initialize(this, UNITYADS_KEY, unityAdsListener, false);
+
         String FONT_TYPE = (String)MyAccount.getValue(this, "FONT");
         Util.setGlobalFont(this, getWindow().getDecorView(), FONT_TYPE);
+
 
 
         islineclick=false;
@@ -452,6 +461,42 @@ public class MainActivity extends Activity {
     }   //하단 월 horizontalscroll이 visible 됐을대
 
 
+
+
+
+
+
+    private class UnityAdsListener implements IUnityAdsListener {
+
+        @Override
+        public void onUnityAdsReady(String s) {
+            // 광고 로드 되었을 때
+            Log.d("ad_status", "on Ready!");
+        }
+
+        @Override
+        public void onUnityAdsStart(String s) {
+            Log.d("ad_status", "Started!");
+        }
+
+        @Override
+        public void onUnityAdsFinish(String s, UnityAds.FinishState finishState) {
+            if(finishState != UnityAds.FinishState.SKIPPED) {
+                // reward
+            } else {
+
+            }
+            Log.d("ad_status", "Finished!");
+
+        }
+
+        @Override
+        public void onUnityAdsError(UnityAds.UnityAdsError unityAdsError, String s) {
+            Log.d("ad_status", "Error");
+        }
+
+
+    }
 
 
 }

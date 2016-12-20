@@ -12,28 +12,35 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.unity3d.ads.UnityAds;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
+
+
 import java.util.Calendar;
+
 
 /**
  * Created by Administrator on 2016-12-10.
  */
 
+
+
 public class WDailyActivity extends Activity {
 
     EditText editdaily = null;
     public TimeDB mTimeDB = null;
-    public NewsDB mNewsDB =null;
-    Intent intent=null;
+    public NewsDB mNewsDB = null;
+    Intent intent = null;
 
-    int weathermode ; // 0: sunny 1: partly cloudy 2: cloud 3: rain 4: snow 5: snow/rain
+    int weathermode; // 0: sunny 1: partly cloudy 2: cloud 3: rain 4: snow 5: snow/rain
     int weather_id;
     ImageView weather = null;
-    String s_news ="";
-    String hyper ="";
+    String s_news = "";
+    String hyper = "";
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +51,12 @@ public class WDailyActivity extends Activity {
         mTimeDB = TimeDB.getInstance(this);
         mNewsDB = NewsDB.getInstance(this);
 
-        TextView daily= (TextView)findViewById(R.id.w_daily);
-        editdaily = (EditText)findViewById(R.id.w_daily_edit);
-        String mmonth ="";
-        String mweek ="";
+        TextView daily = (TextView) findViewById(R.id.w_daily);
+        editdaily = (EditText) findViewById(R.id.w_daily_edit);
+        String mmonth = "";
+        String mweek = "";
 
-        String FONT_TYPE = (String)MyAccount.getValue(this, "FONT");
+        String FONT_TYPE = (String) MyAccount.getValue(this, "FONT");
         Util.setGlobalFont(this, getWindow().getDecorView(), FONT_TYPE);
 
         intent = getIntent();
@@ -58,18 +65,17 @@ public class WDailyActivity extends Activity {
 
         weathermode = 1;
         weather_id = R.id.sunny;
-        weather = (ImageView)findViewById(weather_id);
+        weather = (ImageView) findViewById(weather_id);
 
 
         ////////////////////////////
 
 
-
         ////////////DB 존재하면 내용을 append
-        String[] columns = new String[]{"content","weather"};
-        String[] temp = {""+intent.getIntExtra("year",0),""+intent.getIntExtra("month",0),""+intent.getIntExtra("day",0)};
-        Cursor c = mTimeDB.query(columns ,"year = ? AND month =? AND day = ? ",temp,null,null,null);
-        if(c != null && c.getCount()!=0){
+        String[] columns = new String[]{"content", "weather"};
+        String[] temp = {"" + intent.getIntExtra("year", 0), "" + intent.getIntExtra("month", 0), "" + intent.getIntExtra("day", 0)};
+        Cursor c = mTimeDB.query(columns, "year = ? AND month =? AND day = ? ", temp, null, null, null);
+        if (c != null && c.getCount() != 0) {
 
             c.moveToFirst();
             editdaily.setText(c.getString(0));
@@ -77,137 +83,179 @@ public class WDailyActivity extends Activity {
             weathermode = c.getInt(1);
             weather.setAlpha(0.3f);
 
-            switch (weathermode){
-                case 0: weather_id = R.id.sunny; break;
-                case 1: weather_id = R.id.cloud; break;
-                case 2: weather_id = R.id.smokycloud; break;
-                case 3: weather_id = R.id.rain; break;
-                case 4: weather_id = R.id.snow; break;
-                case 5: weather_id = R.id.snow_rain; break;
+            switch (weathermode) {
+                case 0:
+                    weather_id = R.id.sunny;
+                    break;
+                case 1:
+                    weather_id = R.id.cloud;
+                    break;
+                case 2:
+                    weather_id = R.id.smokycloud;
+                    break;
+                case 3:
+                    weather_id = R.id.rain;
+                    break;
+                case 4:
+                    weather_id = R.id.snow;
+                    break;
+                case 5:
+                    weather_id = R.id.snow_rain;
+                    break;
 
 
             }
-            weather =(ImageView)findViewById(weather_id);
+            weather = (ImageView) findViewById(weather_id);
             weather.setAlpha(1.0f);
 
 
-
         }
-
-
 
 
         /////////////////////////////////////////
 
 
-        switch(intent.getIntExtra("month",0)){
-            case 1: mmonth = "January"; break;
-            case 2: mmonth = "Febuary"; break;
-            case 3: mmonth = "March"; break;
-            case 4: mmonth = "April"; break;
-            case 5: mmonth = "May"; break;
-            case 6: mmonth = "June"; break;
-            case 7: mmonth = "July"; break;
-            case 8: mmonth = "August"; break;
-            case 9: mmonth = "September"; break;
-            case 10: mmonth = "October"; break;
-            case 11: mmonth = "November"; break;
-            case 12: mmonth = "December"; break;
+        switch (intent.getIntExtra("month", 0)) {
+            case 1:
+                mmonth = "January";
+                break;
+            case 2:
+                mmonth = "Febuary";
+                break;
+            case 3:
+                mmonth = "March";
+                break;
+            case 4:
+                mmonth = "April";
+                break;
+            case 5:
+                mmonth = "May";
+                break;
+            case 6:
+                mmonth = "June";
+                break;
+            case 7:
+                mmonth = "July";
+                break;
+            case 8:
+                mmonth = "August";
+                break;
+            case 9:
+                mmonth = "September";
+                break;
+            case 10:
+                mmonth = "October";
+                break;
+            case 11:
+                mmonth = "November";
+                break;
+            case 12:
+                mmonth = "December";
+                break;
 
         }
 
-        switch(intent.getIntExtra("week",0)){
-            case 1: mweek = "Sunday"; break;
-            case 2: mweek = "Monday"; break;
-            case 3: mweek = "Tuesday"; break;
-            case 4: mweek = "Wednesday"; break;
-            case 5: mweek = "Thursday"; break;
-            case 6: mweek = "Friday"; break;
-            case 7: mweek = "Saturday"; break;
+        switch (intent.getIntExtra("week", 0)) {
+            case 1:
+                mweek = "Sunday";
+                break;
+            case 2:
+                mweek = "Monday";
+                break;
+            case 3:
+                mweek = "Tuesday";
+                break;
+            case 4:
+                mweek = "Wednesday";
+                break;
+            case 5:
+                mweek = "Thursday";
+                break;
+            case 6:
+                mweek = "Friday";
+                break;
+            case 7:
+                mweek = "Saturday";
+                break;
 
 
         }
         editdaily.requestFocus();
 
-        daily.setTypeface(Typeface.createFromAsset(getAssets(),"MILKYWAY.TTF"));    //날짜 폰트 은하수
-        daily.setText(mweek + " / " +mmonth+" "+intent.getIntExtra("day",0)+" / " + intent.getIntExtra("year",0));  //상단에 날짜 띄어줌
+        daily.setTypeface(Typeface.createFromAsset(getAssets(), "MILKYWAY.TTF"));    //날짜 폰트 은하수
+        daily.setText(mweek + " / " + mmonth + " " + intent.getIntExtra("day", 0) + " / " + intent.getIntExtra("year", 0));  //상단에 날짜 띄어줌
 
 
     }
 
-    public void weatherClick(View v){
+    public void weatherClick(View v) {
 
-        weathermode =Integer.parseInt((String)v.getTag()) ;
+        weathermode = Integer.parseInt((String) v.getTag());
         weather_id = v.getId();
         weather.setAlpha(0.3f);
 
-        weather = (ImageView)findViewById(weather_id);
+        weather = (ImageView) findViewById(weather_id);
         weather.setAlpha(1.0f);
-
 
 
     }
 
 
-    public void onClick(View v){
-        switch(v.getId()){
+    public void onClick(View v) {
+        switch (v.getId()) {
 
 
-
-            case R.id.w_write_clock : {           //시계버튼 클릭했을 시 현재 시간 append해주는 기능
-                Calendar oCalendar =Calendar.getInstance();
+            case R.id.w_write_clock: {           //시계버튼 클릭했을 시 현재 시간 append해주는 기능
+                Calendar oCalendar = Calendar.getInstance();
                 int curHour = oCalendar.get(Calendar.HOUR);
                 int curMinute = oCalendar.get(Calendar.MINUTE);
-                int curNoon= oCalendar.get(Calendar.AM_PM); // 0이면 AM 1이면 PM
+                int curNoon = oCalendar.get(Calendar.AM_PM); // 0이면 AM 1이면 PM
                 String tempNoon;
-                if(curNoon==0){
+                if (curNoon == 0) {
                     tempNoon = "AM";
-                }else{
-                    tempNoon="PM";
+                } else {
+                    tempNoon = "PM";
                 }
 
-                editdaily.append(tempNoon + " "+ curHour + " : " +curMinute);
+                editdaily.append(tempNoon + " " + curHour + " : " + curMinute);
                 break;
-
-
 
 
             }
 
 
+            case R.id.w_done: {           //done버튼이 눌렸을시 디비에 값저장
 
-            case R.id.w_done :{           //done버튼이 눌렸을시 디비에 값저장
 
+                if (editdaily.getText().toString().length() == 0) {
 
-                if(editdaily.getText().toString().length()==0){
-
-                }else{
+                } else {
 
 
                     String[] columns = new String[]{"content"};
-                    String[] temp = {""+intent.getIntExtra("year",0),""+intent.getIntExtra("month",0),""+intent.getIntExtra("day",0)};
-                    Cursor c = mTimeDB.query(columns ,"year = ? AND month =? AND day = ? ",temp,null,null,null);
-                    if(c != null && c.getCount()!=0){
+                    String[] temp = {"" + intent.getIntExtra("year", 0), "" + intent.getIntExtra("month", 0), "" + intent.getIntExtra("day", 0)};
+                    Cursor c = mTimeDB.query(columns, "year = ? AND month =? AND day = ? ", temp, null, null, null);
+                    if (c != null && c.getCount() != 0) {
 
 
                         ContentValues upRowValue = new ContentValues();
-                        upRowValue.put("content",editdaily.getText().toString());
-                        upRowValue.put("weather",weathermode);
-                        mTimeDB.update(upRowValue,"year = ? AND month =? AND day = ? ",temp);
+                        upRowValue.put("content", editdaily.getText().toString());
+                        upRowValue.put("weather", weathermode);
+                        mTimeDB.update(upRowValue, "year = ? AND month =? AND day = ? ", temp);
 
-                    }else{
+                    } else {
 
-                        int year =intent.getIntExtra("year",0);
-                        int month =intent.getIntExtra("month",0);
-                        int day =intent.getIntExtra("day",0);
+                        int year = intent.getIntExtra("year", 0);
+                        int month = intent.getIntExtra("month", 0);
+                        int day = intent.getIntExtra("day", 0);
 
                         ContentValues addRowValue = new ContentValues();
-                        addRowValue.put("year",year);
-                        addRowValue.put("month",month);
-                        addRowValue.put("day",day);
-                        addRowValue.put("week",intent.getIntExtra("week",0));
-                        addRowValue.put("content",editdaily.getText().toString());
-                        addRowValue.put("weather",weathermode);
+                        addRowValue.put("year", year);
+                        addRowValue.put("month", month);
+                        addRowValue.put("day", day);
+                        addRowValue.put("week", intent.getIntExtra("week", 0));
+                        addRowValue.put("content", editdaily.getText().toString());
+                        addRowValue.put("weather", weathermode);
 
                         long insertRecordId = mTimeDB.insert(addRowValue);
 
@@ -217,7 +265,7 @@ public class WDailyActivity extends Activity {
                         int curDay = oCalendar.get(Calendar.DAY_OF_MONTH);
 
 
-                        if(curYear==year&&curMonth==month&&curDay==day) {
+                        if (curYear == year && curMonth == month && curDay == day) {
                             news();
                             ContentValues addRowValue1 = new ContentValues();
                             addRowValue1.put("year", year);
@@ -227,7 +275,7 @@ public class WDailyActivity extends Activity {
                             addRowValue1.put("content", s_news);
 
                             long insertRecordId1 = mNewsDB.insert(addRowValue1);
-                        }else{
+                        } else {
 
                         }
 
@@ -235,9 +283,18 @@ public class WDailyActivity extends Activity {
                     }
                     c.close();
 
+                    /*********************************************/
+                    // 연필 수 늘리기
+                    // 연속 찾아서 ++ 되는 갯수 바꿔줘야함
+                    // 광고 보면 *2배 적용해야함
+                    UnityAds.show(this, "rewardedVideo");
+
+                    int cnt = (int) MyAccount.getValue(this, "CNT");
+                    MyAccount.setPencilCount(this, cnt + 1);
+
+                    /*********************************************/
+
                 }   //DB에 저장 되어있으면 갱신 없으면 생성
-
-
 
 
                 finish();
@@ -245,12 +302,11 @@ public class WDailyActivity extends Activity {
             }
 
 
-
         }
 
     }
 
-    public void news(){
+    public void news() {
 
         try {
             Document document = Jsoup.connect("http://news.naver.com/main/ranking/popularDay.nhn").get();
@@ -262,29 +318,27 @@ public class WDailyActivity extends Activity {
                 hyper = "";
                 for (int i = 0; i < elements.size(); i++) {
 
-                    s_news+=(elements.get(i).attr("title")+"@");
+                    s_news += (elements.get(i).attr("title") + "@");
 
 
                 }
 
                 for (int i = 0; i < elements.size(); i++) {
 
-                    hyper+=(elements.get(i).attr("href")+"@");
+                    hyper += (elements.get(i).attr("href") + "@");
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
 
-    public void onStop(){
+    public void onStop() {
         super.onStop();
     }
 
+
+
 }
-
-
-
-
