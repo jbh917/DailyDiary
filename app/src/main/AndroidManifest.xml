@@ -28,6 +28,8 @@
             android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name=".SearchActivity"
             android:windowSoftInputMode="adjustResize"></activity>
+        <activity android:name=".NewsActivity"
+            android:windowSoftInputMode="adjustResize"></activity>
 
     </application>
 

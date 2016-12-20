@@ -12,6 +12,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+
 import java.util.Calendar;
 
 /**
@@ -22,18 +26,23 @@ public class WDailyActivity extends Activity {
 
     EditText editdaily = null;
     public TimeDB mTimeDB = null;
+    public NewsDB mNewsDB =null;
     Intent intent=null;
 
     int weathermode ; // 0: sunny 1: partly cloudy 2: cloud 3: rain 4: snow 5: snow/rain
     int weather_id;
     ImageView weather = null;
+    String s_news ="";
+    String hyper ="";
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wdaily_activity_layout);
 
+
         mTimeDB = TimeDB.getInstance(this);
+        mNewsDB = NewsDB.getInstance(this);
 
         TextView daily= (TextView)findViewById(R.id.w_daily);
         editdaily = (EditText)findViewById(R.id.w_daily_edit);
@@ -123,6 +132,7 @@ public class WDailyActivity extends Activity {
         daily.setTypeface(Typeface.createFromAsset(getAssets(),"MILKYWAY.TTF"));    //날짜 폰트 은하수
         daily.setText(mweek + " / " +mmonth+" "+intent.getIntExtra("day",0)+" / " + intent.getIntExtra("year",0));  //상단에 날짜 띄어줌
 
+
     }
 
     public void weatherClick(View v){
@@ -159,14 +169,20 @@ public class WDailyActivity extends Activity {
                 editdaily.append(tempNoon + " "+ curHour + " : " +curMinute);
                 break;
 
+
+
+
             }
 
 
 
             case R.id.w_done :{           //done버튼이 눌렸을시 디비에 값저장
+
+
                 if(editdaily.getText().toString().length()==0){
 
                 }else{
+
 
                     String[] columns = new String[]{"content"};
                     String[] temp = {""+intent.getIntExtra("year",0),""+intent.getIntExtra("month",0),""+intent.getIntExtra("day",0)};
@@ -181,16 +197,39 @@ public class WDailyActivity extends Activity {
 
                     }else{
 
+                        int year =intent.getIntExtra("year",0);
+                        int month =intent.getIntExtra("month",0);
+                        int day =intent.getIntExtra("day",0);
 
                         ContentValues addRowValue = new ContentValues();
-                        addRowValue.put("year",intent.getIntExtra("year",0));
-                        addRowValue.put("month",intent.getIntExtra("month",0));
-                        addRowValue.put("day",intent.getIntExtra("day",0));
+                        addRowValue.put("year",year);
+                        addRowValue.put("month",month);
+                        addRowValue.put("day",day);
                         addRowValue.put("week",intent.getIntExtra("week",0));
                         addRowValue.put("content",editdaily.getText().toString());
                         addRowValue.put("weather",weathermode);
 
                         long insertRecordId = mTimeDB.insert(addRowValue);
+
+                        Calendar oCalendar = Calendar.getInstance();
+                        int curYear = oCalendar.get(Calendar.YEAR);
+                        int curMonth = oCalendar.get(Calendar.MONTH) + 1;   //0이면 1월
+                        int curDay = oCalendar.get(Calendar.DAY_OF_MONTH);
+
+
+                        if(curYear==year&&curMonth==month&&curDay==day) {
+                            news();
+                            ContentValues addRowValue1 = new ContentValues();
+                            addRowValue1.put("year", year);
+                            addRowValue1.put("month", month);
+                            addRowValue1.put("day", day);
+                            addRowValue1.put("hyper", hyper);
+                            addRowValue1.put("content", s_news);
+
+                            long insertRecordId1 = mNewsDB.insert(addRowValue1);
+                        }else{
+
+                        }
 
 
                     }
@@ -210,10 +249,42 @@ public class WDailyActivity extends Activity {
         }
 
     }
+
+    public void news(){
+
+        try {
+            Document document = Jsoup.connect("http://news.naver.com/main/ranking/popularDay.nhn").get();
+
+            if (null != document) {
+
+                Elements elements = document.select("div#ranking_000 > ul > li > a");
+                s_news = "";
+                hyper = "";
+                for (int i = 0; i < elements.size(); i++) {
+
+                    s_news+=(elements.get(i).attr("title")+"@");
+
+
+                }
+
+                for (int i = 0; i < elements.size(); i++) {
+
+                    hyper+=(elements.get(i).attr("href")+"@");
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+
     public void onStop(){
         super.onStop();
     }
 
 }
+
+
 
 

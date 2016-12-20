@@ -25,6 +25,7 @@ public class RDailyActivity extends Activity {
 
     TextView textdaily = null;
     public TimeDB mTimeDB = null;
+    public NewsDB mNewsDB =null;
     Intent intent=null;
     int year,month,day,week,weather1;
 
@@ -41,6 +42,7 @@ public class RDailyActivity extends Activity {
         Util.setGlobalFont(this, getWindow().getDecorView());
 
         mTimeDB = TimeDB.getInstance(this);
+        mNewsDB = NewsDB.getInstance(this);
 
         TextView daily= (TextView)findViewById(R.id.r_daily);
         textdaily = (TextView)findViewById(R.id.r_daily_edit);
@@ -124,6 +126,40 @@ public class RDailyActivity extends Activity {
         switch(v.getId()){
 
 
+            case R.id.news:{
+
+                String[] columns = new String[]{"content"};
+
+
+                String[] temp = {""+year,""+month,""+day};
+                Cursor c = mNewsDB.query(columns ,"year = ? AND month =? AND day = ? ",temp,null,null,null);
+                if(c != null && c.getCount()!=0){
+
+                    final Intent intent = new Intent(getApplicationContext(), NewsActivity.class);
+
+                    intent.putExtra("year", year);
+                    intent.putExtra("month", month);
+                    intent.putExtra("day", day);
+                    intent.putExtra("week", week);
+
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            startActivity(intent);
+                        }
+                    }, 250);
+                }
+
+
+
+
+                break;
+
+
+
+
+            }
 
 
             case R.id.r_done :{           //done버튼이 눌렸을시 디비에 값저장

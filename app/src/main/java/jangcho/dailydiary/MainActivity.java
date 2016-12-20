@@ -34,6 +34,7 @@ public class MainActivity extends Activity {
     ListView mListView = null;
     DotBaseAdapter mAdapter = null;
     public TimeDB mTimeDB = null;
+    public NewsDB mNewsDB = null;
     HorizontalScrollView mhori = null;
     LinearLayout lin = null;
     LinearLayout ylin = null;
@@ -58,7 +59,7 @@ public class MainActivity extends Activity {
 
         islineclick=false;
         mTimeDB = TimeDB.getInstance(this);
-
+        mNewsDB = NewsDB.getInstance(this);
 
         mData = new ArrayList<Data>();
         mhori = (HorizontalScrollView)findViewById(R.id.horizontal);
@@ -173,6 +174,8 @@ public class MainActivity extends Activity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 int deleteRecordCnt = mTimeDB.delete("year='" +mData.get(temp_postion).tempYear+"'" +" AND month='" + mData.get(temp_postion).tempMonth+"'" +" AND day = '"+mData.get(temp_postion).tempDay+"'" ,null );
+
+                                int deleteRecordCnt1 = mNewsDB.delete("year='" +mData.get(temp_postion).tempYear+"'" +" AND month='" + mData.get(temp_postion).tempMonth+"'" +" AND day = '"+mData.get(temp_postion).tempDay+"'" ,null );
                                 banbok();
                             }
                         }).setNegativeButton("취소",

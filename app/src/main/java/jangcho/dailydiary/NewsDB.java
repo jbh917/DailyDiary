@@ -34,9 +34,11 @@ public class NewsDB {
 
         mDatabase = context.openOrCreateDatabase(DB_TIME,Context.MODE_PRIVATE,null);
 
-        mDatabase.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NEWS + "(" + "_id INTEGER PRIMARY KEY," +
-                "time_id           INTEGER"+
-                "category        INTEGER,"+
+        mDatabase.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NEWS + "(" + "_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "year        INTEGER,"+
+                "month        INTEGER,"+
+                "day        INTEGER,"+
+                "hyper        TEXT,"+
                 "content        TEXT);"
         );
 
