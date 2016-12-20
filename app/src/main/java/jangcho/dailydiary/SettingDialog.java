@@ -1,11 +1,13 @@
 package jangcho.dailydiary;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -21,6 +23,8 @@ public class SettingDialog extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND, WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
 
         setContentView(R.layout.dialog_settings);
+
+        initDialog();
     }
 
     public void onClick(View v) {
@@ -65,10 +69,30 @@ public class SettingDialog extends Activity {
                 }
 
                 break;
+        }
+    }
 
 
+    private void initDialog() {
 
+        String[] fonts = {"MILKYWAY.TTF",
+                "NanumGothic.ttc",
+                "NanumMyeongjo.ttc",
+                "SeoulHangangM.otf",
+                "SpoqaHanSansRegular.ttf",
+                "THEFACESHOP_INKLIPQUID.otf"};
 
+        TextView[] tv = {(TextView) findViewById(R.id.milkyway),
+                (TextView) findViewById(R.id.nanum_gothic),
+                (TextView) findViewById(R.id.nanum_myeongjo),
+                (TextView) findViewById(R.id.seoul_hangang),
+                (TextView) findViewById(R.id.spoqa_han_sans),
+                (TextView) findViewById(R.id.tfs_inklipquid)
+        };
+
+        for(int i=0; i<fonts.length; i++) {
+            Typeface tf = Typeface.createFromAsset(getAssets(), fonts[i]);
+            tv[i].setTypeface(tf);
         }
     }
 }

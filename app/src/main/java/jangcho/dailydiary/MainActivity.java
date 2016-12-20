@@ -298,12 +298,8 @@ public class MainActivity extends Activity {
     public void onClick(View v){
         switch(v.getId()){
             case R.id.main_month:{                          //하단 월 버튼 눌렀을 시
-
-                startActivity(new Intent(this, SettingDialog.class));
-
-
-                //mhori.setVisibility(View.VISIBLE);
-                //lin.setVisibility(View.GONE);
+                mhori.setVisibility(View.VISIBLE);
+                lin.setVisibility(View.GONE);
                 break;
             }
             case R.id.main_year:{                       //하단 년 버튼 눌렀을 시
@@ -311,9 +307,7 @@ public class MainActivity extends Activity {
                 ylin.setVisibility(View.VISIBLE);
                 break;
             }
-
             case R.id.cross:{
-
                 final Intent intent = new Intent(getApplicationContext(), RDailyActivity.class);
 
                 Calendar oCalendar = Calendar.getInstance();
@@ -353,10 +347,11 @@ public class MainActivity extends Activity {
                 banbok();
                 break;
             }
-
-            /////알람기능////////
-
-
+            case R.id.font: {
+                startActivity(new Intent(this, SettingDialog.class));
+                break;
+            }
+                /////알람기능////////
 
         }
 
