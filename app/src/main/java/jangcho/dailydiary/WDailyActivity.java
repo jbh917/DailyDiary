@@ -2,24 +2,15 @@ package jangcho.dailydiary;
 
 import android.app.Activity;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.Spinner;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
 
 import java.util.Calendar;
 
@@ -27,30 +18,46 @@ import java.util.Calendar;
  * Created by Administrator on 2016-12-10.
  */
 
-public class DailyActivity extends Activity {
+public class WDailyActivity extends Activity {
 
     EditText editdaily = null;
     public TimeDB mTimeDB = null;
     Intent intent=null;
 
+    int weathermode ; // 0: sunny 1: partly cloudy 2: cloud 3: rain 4: snow 5: snow/rain
+    int weather_id;
+    ImageView weather = null;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.daily_activity_layout);
+        setContentView(R.layout.wdaily_activity_layout);
 
         mTimeDB = TimeDB.getInstance(this);
 
-        TextView daily= (TextView)findViewById(R.id.daily);
-        editdaily = (EditText)findViewById(R.id.daily_edit);
+        TextView daily= (TextView)findViewById(R.id.w_daily);
+        editdaily = (EditText)findViewById(R.id.w_daily_edit);
         String mmonth ="";
         String mweek ="";
 
+        Util.setGlobalFont(this, getWindow().getDecorView());
+
+
         intent = getIntent();
+
+        //////날씨 관련///////////
+
+        weathermode = 1;
+        weather_id = R.id.sunny;
+        weather = (ImageView)findViewById(weather_id);
+
+
+        ////////////////////////////
 
 
 
         ////////////DB 존재하면 내용을 append
-        String[] columns = new String[]{"content"};
+        String[] columns = new String[]{"content","weather"};
         String[] temp = {""+intent.getIntExtra("year",0),""+intent.getIntExtra("month",0),""+intent.getIntExtra("day",0)};
         Cursor c = mTimeDB.query(columns ,"year = ? AND month =? AND day = ? ",temp,null,null,null);
         if(c != null && c.getCount()!=0){
@@ -58,7 +65,29 @@ public class DailyActivity extends Activity {
             c.moveToFirst();
             editdaily.setText(c.getString(0));
             editdaily.setSelection(editdaily.length());
+            weathermode = c.getInt(1);
+            weather.setAlpha(0.3f);
+
+            switch (weathermode){
+                case 0: weather_id = R.id.sunny; break;
+                case 1: weather_id = R.id.cloud; break;
+                case 2: weather_id = R.id.smokycloud; break;
+                case 3: weather_id = R.id.rain; break;
+                case 4: weather_id = R.id.snow; break;
+                case 5: weather_id = R.id.snow_rain; break;
+
+
+            }
+            weather =(ImageView)findViewById(weather_id);
+            weather.setAlpha(1.0f);
+
+
+
         }
+
+
+
+
         /////////////////////////////////////////
 
 
@@ -96,9 +125,26 @@ public class DailyActivity extends Activity {
 
     }
 
+    public void weatherClick(View v){
+
+        weathermode =Integer.parseInt((String)v.getTag()) ;
+        weather_id = v.getId();
+        weather.setAlpha(0.3f);
+
+        weather = (ImageView)findViewById(weather_id);
+        weather.setAlpha(1.0f);
+
+
+
+    }
+
+
     public void onClick(View v){
         switch(v.getId()){
-            case R.id.write_clock : {           //시계버튼 클릭했을 시 현재 시간 append해주는 기능
+
+
+
+            case R.id.w_write_clock : {           //시계버튼 클릭했을 시 현재 시간 append해주는 기능
                 Calendar oCalendar =Calendar.getInstance();
                 int curHour = oCalendar.get(Calendar.HOUR);
                 int curMinute = oCalendar.get(Calendar.MINUTE);
@@ -117,7 +163,7 @@ public class DailyActivity extends Activity {
 
 
 
-            case R.id.done :{           //done버튼이 눌렸을시 디비에 값저장
+            case R.id.w_done :{           //done버튼이 눌렸을시 디비에 값저장
                 if(editdaily.getText().toString().length()==0){
 
                 }else{
@@ -126,11 +172,15 @@ public class DailyActivity extends Activity {
                     String[] temp = {""+intent.getIntExtra("year",0),""+intent.getIntExtra("month",0),""+intent.getIntExtra("day",0)};
                     Cursor c = mTimeDB.query(columns ,"year = ? AND month =? AND day = ? ",temp,null,null,null);
                     if(c != null && c.getCount()!=0){
+
+
                         ContentValues upRowValue = new ContentValues();
                         upRowValue.put("content",editdaily.getText().toString());
+                        upRowValue.put("weather",weathermode);
                         mTimeDB.update(upRowValue,"year = ? AND month =? AND day = ? ",temp);
 
                     }else{
+
 
                         ContentValues addRowValue = new ContentValues();
                         addRowValue.put("year",intent.getIntExtra("year",0));
@@ -138,6 +188,7 @@ public class DailyActivity extends Activity {
                         addRowValue.put("day",intent.getIntExtra("day",0));
                         addRowValue.put("week",intent.getIntExtra("week",0));
                         addRowValue.put("content",editdaily.getText().toString());
+                        addRowValue.put("weather",weathermode);
 
                         long insertRecordId = mTimeDB.insert(addRowValue);
 

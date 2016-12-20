@@ -8,7 +8,9 @@ import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -106,14 +108,14 @@ public class MainActivity extends Activity {
             if (curWeek == 0) {
                 curWeek = 7;
             }
-            String[] columns = new String[]{"content"};
+            String[] columns = new String[]{"content","weather"};
             String[] temp = {""+data.tempYear,""+data.tempMonth,""+i};
             Cursor c = mTimeDB.query(columns ,"year = ? AND month =? AND day = ? ",temp,null,null,null);
             if(c != null && c.getCount()!=0){
                 data.isDB = true;
                 c.moveToFirst();
                 data.tempContent = c.getString(0);
-
+                data.weather = c.getInt(1);
             }
             c.close();
 
@@ -139,15 +141,22 @@ public class MainActivity extends Activity {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), DailyActivity.class);
+                final Intent intent = new Intent(getApplicationContext(), RDailyActivity.class);
 
                 intent.putExtra("year", mData.get(position).tempYear);
                 intent.putExtra("month", mData.get(position).tempMonth);
                 intent.putExtra("day", mData.get(position).tempDay);
                 intent.putExtra("week", mData.get(position).tempWeek);
 
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(intent);
+                    }
+                }, 250);
 
-                startActivity(intent);
+
             }
         });
 
@@ -202,7 +211,7 @@ public class MainActivity extends Activity {
 
         if(islineclick) {
             mData.clear();
-            String[] columns = new String[]{"_id", "year", "month", "day", "content", "week"};
+            String[] columns = new String[]{"_id", "year", "month", "day", "content", "week","weather"};
             Cursor c = mTimeDB.query(columns, "year = '" + curYear + "' AND month = '" + curMonth + "'", null, null, null, "day ASC");
             if (c != null) {
                 while (c.moveToNext()) {
@@ -212,8 +221,10 @@ public class MainActivity extends Activity {
                     data.tempDay = c.getInt(3);
                     data.tempContent = c.getString(4);
                     data.tempWeek = c.getInt(5);
+                    data.weather = c.getInt(6);
                     data.isDB = true;
                     mData.add(data);
+
                 }
                 c.close();
             }
@@ -253,14 +264,14 @@ public class MainActivity extends Activity {
                     if (curWeek == 0) {
                         curWeek = 7;
                     }
-                    String[] columns = new String[]{"content"};
+                    String[] columns = new String[]{"content","weather"};
                     String[] temp = {"" + data.tempYear, "" + data.tempMonth, "" + i};
                     Cursor c = mTimeDB.query(columns, "year = ? AND month =? AND day = ? ", temp, null, null, null);
                     if (c != null && c.getCount() != 0) {
                         data.isDB = true;
                         c.moveToFirst();
                         data.tempContent = c.getString(0);
-
+                        data.weather =c.getInt(1);
                     }
                     c.close();
 
@@ -300,7 +311,7 @@ public class MainActivity extends Activity {
 
             case R.id.cross:{
 
-                Intent intent = new Intent(getApplicationContext(), DailyActivity.class);
+                final Intent intent = new Intent(getApplicationContext(), RDailyActivity.class);
 
                 Calendar oCalendar = Calendar.getInstance();
 
@@ -309,13 +320,24 @@ public class MainActivity extends Activity {
                 intent.putExtra("day", oCalendar.get(Calendar.DAY_OF_MONTH));
                 intent.putExtra("week", oCalendar.get(Calendar.DAY_OF_WEEK));
 
-
-                startActivity(intent);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(intent);
+                    }
+                }, 250);
                 break;
             }
             case R.id.search:{
-                Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
-                startActivity(intent);
+                final Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(intent);
+                    }
+                }, 250);
                 break;
             }
             case R.id.line:{

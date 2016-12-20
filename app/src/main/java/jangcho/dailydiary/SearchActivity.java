@@ -2,23 +2,18 @@ package jangcho.dailydiary;
 
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 /**
  * Created by Administrator on 2016-12-10.
@@ -36,6 +31,7 @@ public class SearchActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_layout);
 
+        Util.setGlobalFont(this, getWindow().getDecorView());
 
 
         mData = new ArrayList<Data>();
@@ -48,7 +44,8 @@ public class SearchActivity extends Activity {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), DailyActivity.class);
+
+                final Intent intent = new Intent(getApplicationContext(), WDailyActivity.class);
 
                 intent.putExtra("year", mData.get(position).tempYear);
                 intent.putExtra("month", mData.get(position).tempMonth);
@@ -56,7 +53,14 @@ public class SearchActivity extends Activity {
                 intent.putExtra("week", mData.get(position).tempWeek);
 
 
-                startActivity(intent);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(intent);
+                    }
+                }, 250);
+
             }
         });
 
@@ -72,7 +76,7 @@ public class SearchActivity extends Activity {
                 if(s.toString()==""){
 
                 }else {
-                    String[] columns = new String[]{"_id", "year", "month", "day", "content", "week"};
+                    String[] columns = new String[]{"_id", "year", "month", "day", "content", "week","weather"};
                     Cursor c = mTimeDB.query(columns, "content LIKE '%" + s.toString() + "%'", null, null, null, "year ASC, month ASC, day ASC");
                     if (c != null) {
                         while (c.moveToNext()) {
@@ -82,6 +86,7 @@ public class SearchActivity extends Activity {
                             data.tempDay = c.getInt(3);
                             data.tempContent = "" + data.tempYear + "/" + data.tempMonth + "/" + data.tempDay + "\n" + c.getString(4);
                             data.tempWeek = c.getInt(5);
+                            data.weather=c.getInt(6);
                             data.isDB = true;
                             mData.add(data);
                         }
