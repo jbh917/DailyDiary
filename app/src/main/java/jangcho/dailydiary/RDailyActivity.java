@@ -37,8 +37,8 @@ public class RDailyActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rdaily_activity_layout);
 
-
-        Util.setGlobalFont(this, getWindow().getDecorView());
+        String FONT_TYPE = (String)MyAccount.getValue(this, "FONT");
+        Util.setGlobalFont(this, getWindow().getDecorView(), FONT_TYPE);
 
         mTimeDB = TimeDB.getInstance(this);
 
@@ -115,7 +115,6 @@ public class RDailyActivity extends Activity {
         }
 
 
-        daily.setTypeface(Typeface.createFromAsset(getAssets(),"MILKYWAY.TTF"));    //날짜 폰트 은하수
         daily.setText(mweek + " / " +mmonth+" "+intent.getIntExtra("day",0)+" / " + intent.getIntExtra("year",0));  //상단에 날짜 띄어줌
 
     }

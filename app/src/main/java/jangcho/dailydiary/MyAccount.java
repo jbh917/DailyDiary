@@ -23,6 +23,8 @@ public class MyAccount {
             return getPrefs(context).getInt(key, 0);
         } else if(key.equals("AVAILABLE")) {
             return getPrefs(context).getBoolean(key, false);
+        } else if(key.equals("FONT")) {
+            return getPrefs(context).getString(key, "MILKYWAY");
         } else {
             return getPrefs(context).getString(key, "");
         }
@@ -44,6 +46,12 @@ public class MyAccount {
     public static void setFontStartTime(Context context, String value) {
         SharedPreferences.Editor editor = getPrefs(context).edit();
         editor.putString("STARTAT", value);
+        editor.commit();
+    }
+
+    public static void setFont(Context context, String value) {
+        SharedPreferences.Editor editor = getPrefs(context).edit();
+        editor.putString("FONT", value);
         editor.commit();
     }
 }

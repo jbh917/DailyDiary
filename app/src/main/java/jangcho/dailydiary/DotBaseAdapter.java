@@ -54,7 +54,8 @@ public class DotBaseAdapter extends BaseAdapter{
 
         if(mData.get(position).isDB){
             View itemLayout1 = mLayoutInflater.inflate(R.layout.content_view_layout,null);
-            Util.setGlobalFont(mContext, itemLayout1);
+            String FONT_TYPE = (String)MyAccount.getValue(mContext, "FONT");
+            Util.setGlobalFont(mContext, itemLayout1, FONT_TYPE);
 
             TextView content_content = (TextView) itemLayout1.findViewById(R.id.content_content);
             TextView content_week = (TextView) itemLayout1.findViewById(R.id.content_week);

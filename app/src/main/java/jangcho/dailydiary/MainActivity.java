@@ -53,7 +53,9 @@ public class MainActivity extends Activity {
         setTheme(android.R.style.Theme_DeviceDefault_NoActionBar_Fullscreen);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        Util.setGlobalFont(this, getWindow().getDecorView());
+
+        String FONT_TYPE = (String)MyAccount.getValue(this, "FONT");
+        Util.setGlobalFont(this, getWindow().getDecorView(), FONT_TYPE);
 
 
         islineclick=false;

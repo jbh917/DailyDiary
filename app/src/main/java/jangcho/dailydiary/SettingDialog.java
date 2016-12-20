@@ -25,6 +25,30 @@ public class SettingDialog extends Activity {
 
     public void onClick(View v) {
         switch(v.getId()) {
+            case R.id.milkyway:
+                MyAccount.setFont(this, "MILKYWAY");
+                break;
+
+            case R.id.nanum_gothic:
+                MyAccount.setFont(this, "nanum_gothic");
+                break;
+
+            case R.id.nanum_myeongjo:
+                MyAccount.setFont(this, "nanum_myeongjo");
+                break;
+
+            case R.id.seoul_hangang:
+                MyAccount.setFont(this, "seoul_hangang");
+                break;
+
+            case R.id.spoqa_han_sans:
+                MyAccount.setFont(this, "spoqa_han_sans");
+                break;
+
+            case R.id.tfs_inklipquid:
+                MyAccount.setFont(this, "tfs_inkliqpuid");
+                break;
+
             case R.id.buy:
 
                 int cnt = (int)MyAccount.getValue(this, "CNT");
