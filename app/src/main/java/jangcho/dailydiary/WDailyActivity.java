@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -235,6 +236,8 @@ public class WDailyActivity extends Activity {
                     String[] columns = new String[]{"content"};
                     String[] temp = {"" + intent.getIntExtra("year", 0), "" + intent.getIntExtra("month", 0), "" + intent.getIntExtra("day", 0)};
                     Cursor c = mTimeDB.query(columns, "year = ? AND month =? AND day = ? ", temp, null, null, null);
+
+
                     if (c != null && c.getCount() != 0) {
 
 
@@ -249,23 +252,19 @@ public class WDailyActivity extends Activity {
                         int month = intent.getIntExtra("month", 0);
                         int day = intent.getIntExtra("day", 0);
 
-                        ContentValues addRowValue = new ContentValues();
-                        addRowValue.put("year", year);
-                        addRowValue.put("month", month);
-                        addRowValue.put("day", day);
-                        addRowValue.put("week", intent.getIntExtra("week", 0));
-                        addRowValue.put("content", editdaily.getText().toString());
-                        addRowValue.put("weather", weathermode);
-
-                        long insertRecordId = mTimeDB.insert(addRowValue);
-
                         Calendar oCalendar = Calendar.getInstance();
                         int curYear = oCalendar.get(Calendar.YEAR);
                         int curMonth = oCalendar.get(Calendar.MONTH) + 1;   //0이면 1월
                         int curDay = oCalendar.get(Calendar.DAY_OF_MONTH);
 
 
+                        oCalendar.add(Calendar.DATE,-1);
+
+///////////////////////////////////////////////오늘 날짜 DB에 Insert
                         if (curYear == year && curMonth == month && curDay == day) {
+
+
+
                             news();
                             ContentValues addRowValue1 = new ContentValues();
                             addRowValue1.put("year", year);
@@ -275,24 +274,107 @@ public class WDailyActivity extends Activity {
                             addRowValue1.put("content", s_news);
 
                             long insertRecordId1 = mNewsDB.insert(addRowValue1);
-                        } else {
+
+                            int count =0;
+                            String[] columns1 = new String[]{"pencil_count"};
+                            String[] temp1 = {"" + oCalendar.get(Calendar.YEAR), "" + (oCalendar.get(Calendar.MONTH)+1), "" + oCalendar.get(Calendar.DATE)};
+                            Cursor c1 = mTimeDB.query(columns1, "year = ? AND month =? AND day = ? ", temp1, null, null, null);
+
+                            if (c1 != null && c1.getCount() != 0) {     //DB에 전날값이 있는경우
+                                c1.moveToFirst();
+                                count = c1.getInt(0);
+                                ContentValues upRowValue = new ContentValues();
+                                upRowValue.put("pencil_count", 0);
+                                mTimeDB.update(upRowValue, "year = ? AND month =? AND day = ? ", temp1);
+
+
+                                    ContentValues addRowValue = new ContentValues();
+                                    addRowValue.put("year", year);
+                                    addRowValue.put("month", month);
+                                    addRowValue.put("day", day);
+                                    addRowValue.put("week", intent.getIntExtra("week", 0));
+                                    addRowValue.put("content", editdaily.getText().toString());
+                                    addRowValue.put("pencil_count",(count+1));
+                                    addRowValue.put("weather", weathermode);
+
+                                    long insertRecordId = mTimeDB.insert(addRowValue);
+
+                                if(count!=0){
+                                    final Intent intent = new Intent(getApplicationContext(), AdsDialog.class);
+
+                                    intent.putExtra("count",count+1);
+
+                                    Handler handler = new Handler();
+                                    handler.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            startActivity(intent);
+                                        }
+                                    }, 250);
+                                }
+
+
+
+                            }   //전날 값이 DB에 있는 경우
+
+                            else{
+
+                                ContentValues addRowValue = new ContentValues();
+                                addRowValue.put("year", year);
+                                addRowValue.put("month", month);
+                                addRowValue.put("day", day);
+                                addRowValue.put("week", intent.getIntExtra("week", 0));
+                                addRowValue.put("content", editdaily.getText().toString());
+                                addRowValue.put("pencil_count",(count+1));
+                                addRowValue.put("weather", weathermode);
+
+                                long insertRecordId = mTimeDB.insert(addRowValue);
+
+                                final Intent intent = new Intent(getApplicationContext(), AdsDialog.class);
+
+                                intent.putExtra("count",count+1);
+
+                                Handler handler = new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        startActivity(intent);
+                                    }
+                                }, 250);
+
+                            }
+
+
+                            c1.close();
+
+
+
+                        }
+      /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+     ////////////////////////////////////오늘날짜가 아닌 날짜 DB에 insert
+                        else {
+
+
+                            ContentValues addRowValue = new ContentValues();
+                            addRowValue.put("year", year);
+                            addRowValue.put("month", month);
+                            addRowValue.put("day", day);
+                            addRowValue.put("week", intent.getIntExtra("week", 0));
+                            addRowValue.put("content", editdaily.getText().toString());
+                            addRowValue.put("pencil_count",0);
+                            addRowValue.put("weather", weathermode);
+
+                            long insertRecordId = mTimeDB.insert(addRowValue);
+
+
+
 
                         }
 
 
                     }
                     c.close();
-
-                    /*********************************************/
-                    // 연필 수 늘리기
-                    // 연속 찾아서 ++ 되는 갯수 바꿔줘야함
-                    // 광고 보면 *2배 적용해야함
-                    //UnityAds.show(this, "rewardedVideo");
-
-                    int cnt = (int) MyAccount.getValue(this, "CNT");
-                    MyAccount.setPencilCount(this, cnt + 1);
-
-                    /*********************************************/
 
                 }   //DB에 저장 되어있으면 갱신 없으면 생성
 
