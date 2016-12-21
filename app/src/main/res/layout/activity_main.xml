@@ -90,10 +90,9 @@
                 android:padding="5dp"
                 android:layout_weight="1"
                 />
-            <TextView
+            <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerInside"
                 android:background="#ffffff"
                 android:id="@+id/font"
                 android:text="F"

@@ -287,7 +287,7 @@ public class WDailyActivity extends Activity {
                     // 연필 수 늘리기
                     // 연속 찾아서 ++ 되는 갯수 바꿔줘야함
                     // 광고 보면 *2배 적용해야함
-                    UnityAds.show(this, "rewardedVideo");
+                    //UnityAds.show(this, "rewardedVideo");
 
                     int cnt = (int) MyAccount.getValue(this, "CNT");
                     MyAccount.setPencilCount(this, cnt + 1);

@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 public class SettingDialog extends Activity {
 
+    Typeface tf;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,8 +92,9 @@ public class SettingDialog extends Activity {
         };
 
         for(int i=0; i<fonts.length; i++) {
-            Typeface tf = Typeface.createFromAsset(getAssets(), fonts[i]);
+            tf = Typeface.createFromAsset(getAssets(), fonts[i]);
             tv[i].setTypeface(tf);
         }
+
     }
 }

@@ -31,7 +31,8 @@
             android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name=".SettingDialog"
             android:theme="@android:style/Theme.Dialog"></activity>
-
+        <activity android:name=".AdsDialog"
+            android:theme="@android:style/Theme.Dialog"></activity>
     </application>
 
 

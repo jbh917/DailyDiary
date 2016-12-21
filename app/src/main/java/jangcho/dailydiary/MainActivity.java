@@ -153,20 +153,73 @@ public class MainActivity extends Activity {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final Intent intent = new Intent(getApplicationContext(), RDailyActivity.class);
 
-                intent.putExtra("year", mData.get(position).tempYear);
-                intent.putExtra("month", mData.get(position).tempMonth);
-                intent.putExtra("day", mData.get(position).tempDay);
-                intent.putExtra("week", mData.get(position).tempWeek);
 
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        startActivity(intent);
+                String[] columns = new String[]{"content"};
+
+
+                String[] temp = {""+mData.get(position).tempYear,""+mData.get(position).tempMonth,""+mData.get(position).tempDay};
+                Cursor c = mTimeDB.query(columns ,"year = ? AND month =? AND day = ? ",temp,null,null,null);
+                if(c != null && c.getCount()!=0){
+
+                    final Intent intent = new Intent(getApplicationContext(), RDailyActivity.class);
+
+                    intent.putExtra("year", mData.get(position).tempYear);
+                    intent.putExtra("month", mData.get(position).tempMonth);
+                    intent.putExtra("day", mData.get(position).tempDay);
+                    intent.putExtra("week", mData.get(position).tempWeek);
+
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            startActivity(intent);
+                        }
+                    }, 250);
+
+
+
+                }else{
+                    if(todayYear!=mData.get(position).tempYear||todayMonth!=mData.get(position).tempMonth||todayDay!=mData.get(position).tempDay){
+
+                        final Intent intent = new Intent(getApplicationContext(), AdsDialog.class);
+
+                        intent.putExtra("year", mData.get(position).tempYear);
+                        intent.putExtra("month", mData.get(position).tempMonth);
+                        intent.putExtra("day", mData.get(position).tempDay);
+                        intent.putExtra("week", mData.get(position).tempWeek);
+
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                startActivity(intent);
+                            }
+                        }, 250);
+
+
+                    }else{
+                        final Intent intent = new Intent(getApplicationContext(), WDailyActivity.class);
+
+                        intent.putExtra("year", mData.get(position).tempYear);
+                        intent.putExtra("month", mData.get(position).tempMonth);
+                        intent.putExtra("day", mData.get(position).tempDay);
+                        intent.putExtra("week", mData.get(position).tempWeek);
+
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                startActivity(intent);
+                            }
+                        }, 250);
+
                     }
-                }, 250);
+
+
+
+                }
+
 
 
             }
@@ -361,7 +414,16 @@ public class MainActivity extends Activity {
                 break;
             }
             case R.id.font: {
-                startActivity(new Intent(this, SettingDialog.class));
+
+
+                final Intent intent = new Intent(getApplicationContext(), SettingDialog.class);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(intent);
+                    }
+                }, 250);
                 break;
             }
                 /////알람기능////////
