@@ -64,7 +64,7 @@
                 android:src="@drawable/dec2"
                 android:id="@+id/main_month"
                 android:onClick="onClick"
-                android:padding="10dp"
+                android:padding="5dp"
                 android:layout_weight="1"
                 />
 
@@ -147,7 +147,7 @@
                     android:src="@drawable/jan2"
                     android:id="@+id/jan"
                     android:onClick="onClick1"
-                    android:padding="15dp"
+                    android:padding="10dp"
                     />
 
                 <ImageButton
@@ -158,7 +158,7 @@
                     android:src="@drawable/feb2"
                     android:id="@+id/feb"
                     android:onClick="onClick1"
-                    android:padding="15dp"
+                    android:padding="10dp"
                     />
 
                 <ImageButton
@@ -169,7 +169,7 @@
                     android:src="@drawable/mar2"
                     android:id="@+id/mar"
                     android:onClick="onClick1"
-                    android:padding="15dp"
+                    android:padding="10dp"
                     />
 
                 <ImageButton
@@ -180,7 +180,7 @@
                     android:src="@drawable/apr2"
                     android:id="@+id/apr"
                     android:onClick="onClick1"
-                    android:padding="15dp"
+                    android:padding="10dp"
                     />
 
                 <ImageButton
@@ -191,7 +191,7 @@
                     android:src="@drawable/may2"
                     android:id="@+id/may"
                     android:onClick="onClick1"
-                    android:padding="15dp"
+                    android:padding="10dp"
                     />
 
                 <ImageButton
@@ -202,7 +202,7 @@
                     android:src="@drawable/jun2"
                     android:id="@+id/jun"
                     android:onClick="onClick1"
-                    android:padding="15dp"
+                    android:padding="10dp"
                     />
 
                 <ImageButton
@@ -213,7 +213,7 @@
                     android:src="@drawable/jul2"
                     android:id="@+id/july"
                     android:onClick="onClick1"
-                    android:padding="15dp"
+                    android:padding="10dp"
                     />
 
                 <ImageButton
@@ -224,7 +224,7 @@
                     android:src="@drawable/aug2"
                     android:id="@+id/aug"
                     android:onClick="onClick1"
-                    android:padding="15dp"
+                    android:padding="10dp"
                     />
 
                 <ImageButton
@@ -235,7 +235,7 @@
                     android:src="@drawable/sep2"
                     android:id="@+id/sep"
                     android:onClick="onClick1"
-                    android:padding="15dp"
+                    android:padding="10dp"
                     />
 
                 <ImageButton
@@ -246,7 +246,7 @@
                     android:src="@drawable/oct2"
                     android:id="@+id/oct"
                     android:onClick="onClick1"
-                    android:padding="15dp"
+                    android:padding="10dp"
                     />
 
                 <ImageButton
@@ -257,7 +257,7 @@
                     android:src="@drawable/nov2"
                     android:id="@+id/nov"
                     android:onClick="onClick1"
-                    android:padding="15dp"
+                    android:padding="10dp"
                     />
 
                 <ImageButton
@@ -268,7 +268,7 @@
                     android:src="@drawable/dec2"
                     android:id="@+id/dec"
                     android:onClick="onClick1"
-                    android:padding="15dp"
+                    android:padding="10dp"
                     />
 
 
