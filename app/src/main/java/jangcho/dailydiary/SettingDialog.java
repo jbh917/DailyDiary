@@ -11,6 +11,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by CHJ on 2016. 12. 20..
  */
@@ -28,63 +32,69 @@ public class SettingDialog extends Activity {
         initDialog();
     }
 
+    public void onBuy(View v) {
+
+        int cnt = (int)MyAccount.getValue(this, "CNT");
+        Log.e("before", cnt+"");
+
+        if(cnt > 56) {
+            MyAccount.setPencilCount(this, cnt - 56);
+            MyAccount.setFontAvailable(this, true);
+
+
+            DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date today = new Date();
+            String today_str = sdFormat.format(today);
+            MyAccount.setFontStartTime(this, today_str);
+
+
+        } else {
+            Toast.makeText(getApplicationContext(), "NOT ENOUGH PENCIL", Toast.LENGTH_LONG).show();
+        }
+
+    }
+
     public void onClick(View v) {
 
-        Button[] btn = {(Button) findViewById(R.id.milkyway),
-                (Button) findViewById(R.id.nanum_gothic),
-                (Button) findViewById(R.id.nanum_myeongjo),
-                (Button) findViewById(R.id.seoul_hangang),
-                (Button) findViewById(R.id.spoqa_han_sans),
-                (Button) findViewById(R.id.tfs_inklipquid)
-        };
+        boolean isAvailable = (boolean) MyAccount.getValue(this, "AVAILABLE");
 
-        switch(v.getId()) {
-            case R.id.milkyway:
-                MyAccount.setFont(this, "MILKYWAY");
-                setBorder(btn);
-                break;
+        if(isAvailable) {
+            Button[] btn = {(Button) findViewById(R.id.milkyway),
+                    (Button) findViewById(R.id.nanum_gothic),
+                    (Button) findViewById(R.id.nanum_myeongjo),
+                    (Button) findViewById(R.id.seoul_hangang),
+                    (Button) findViewById(R.id.spoqa_han_sans),
+                    (Button) findViewById(R.id.tfs_inklipquid)
+            };
 
-            case R.id.nanum_gothic:
-                MyAccount.setFont(this, "nanum_gothic");
-                setBorder(btn);
-                break;
+            switch (v.getId()) {
+                case R.id.milkyway:
+                    MyAccount.setFont(this, "MILKYWAY");
+                    break;
 
-            case R.id.nanum_myeongjo:
-                MyAccount.setFont(this, "nanum_myeongjo");
-                setBorder(btn);
-                break;
+                case R.id.nanum_gothic:
+                    MyAccount.setFont(this, "nanum_gothic");
+                    break;
 
-            case R.id.seoul_hangang:
-                MyAccount.setFont(this, "seoul_hangang");
-                setBorder(btn);
-                break;
+                case R.id.nanum_myeongjo:
+                    MyAccount.setFont(this, "nanum_myeongjo");
+                    break;
 
-            case R.id.spoqa_han_sans:
-                MyAccount.setFont(this, "spoqa_han_sans");
-                setBorder(btn);
-                break;
+                case R.id.seoul_hangang:
+                    MyAccount.setFont(this, "seoul_hangang");
+                    break;
 
-            case R.id.tfs_inklipquid:
-                MyAccount.setFont(this, "tfs_inkliqpuid");
-                setBorder(btn);
-                break;
+                case R.id.spoqa_han_sans:
+                    MyAccount.setFont(this, "spoqa_han_sans");
+                    break;
 
-            case R.id.buy:
-
-                int cnt = (int)MyAccount.getValue(this, "CNT");
-                Log.e("before", cnt+"");
-
-                if(cnt > 56) {
-                    MyAccount.setPencilCount(this, cnt - 56);
-                    MyAccount.setFontAvailable(this, true);
-
-                    Log.e("after_cnt", (int) MyAccount.getValue(this, "CNT") + "");
-                    Log.e("after_boolean", (boolean) MyAccount.getValue(this, "AVAILABLE") + "");
-                } else {
-                    Toast.makeText(getApplicationContext(), "NOT ENOUGH PENCIL", Toast.LENGTH_LONG).show();
-                }
-
-                break;
+                case R.id.tfs_inklipquid:
+                    MyAccount.setFont(this, "tfs_inkliqpuid");
+                    break;
+            }
+            setBorder(btn);
+        } else {
+            Toast.makeText(getApplicationContext(), "NOT AVAILABLE", Toast.LENGTH_LONG).show();
         }
     }
 

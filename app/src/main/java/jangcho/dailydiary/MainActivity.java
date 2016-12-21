@@ -22,9 +22,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import com.unity3d.ads.IUnityAdsListener;
 import com.unity3d.ads.UnityAds;
@@ -34,7 +39,7 @@ public class MainActivity extends Activity {
     int curYear, curMonth, curDay, curHour, curMinute, curNoon, curSecond, curWeek;     //현재 년,월,일,시간,분,낮밤,초,요일
     int todayYear, todayMonth, todayDay ;    //오늘 년/달/일
 
-    ArrayList<Data> mData = null; //현재달의 정보 저장한 ArrayList
+    ArrayList<Data> mData = null;       //현재달의 정보 저장한 ArrayList
     ListView mListView = null;
     DotBaseAdapter mAdapter = null;
     public TimeDB mTimeDB = null;
@@ -42,12 +47,13 @@ public class MainActivity extends Activity {
     HorizontalScrollView mhori = null;
     LinearLayout lin = null;
     LinearLayout ylin = null;
-    int i_alphaid = R.id.dec; //현재 깜빡이는 달의 id
+    int i_alphaid = R.id.dec;           //현재 깜빡이는 달의 id
     int b_alphaid = R.id.y2016;
-    ImageButton i_alphabutt = null;   //현재 깜빡이는 달
+    TextView pc;                        // 연필 갯수 TextView
+    ImageButton i_alphabutt = null;     //현재 깜빡이는 달
     Button b_alphabutt =null;
     Animation ani = null;
-    boolean islineclick =false;     //선모양 버튼이 눌렸는지
+    boolean islineclick =false;         //선모양 버튼이 눌렸는지
 
     final String UNITYADS_KEY = "1239782";
     final private UnityAdsListener unityAdsListener = new UnityAdsListener();
@@ -64,10 +70,18 @@ public class MainActivity extends Activity {
 
 
         UnityAds.initialize(this, UNITYADS_KEY, unityAdsListener, false);
-
+/*
+        MyAccount.setFont(this, "nanum_myeongjo");
+        MyAccount.setFontAvailable(this, false);
+        MyAccount.setPencilCount(this, 100);
+*/
+        isAvailable();
         String FONT_TYPE = (String)MyAccount.getValue(this, "FONT");
         Util.setGlobalFont(this, getWindow().getDecorView(), FONT_TYPE);
 
+        int pencil_count = (int)MyAccount.getValue(this, "CNT");
+        pc = (TextView) findViewById(R.id.pencil_count);
+        pc.setText(pencil_count+"");
 
 
         islineclick=false;
@@ -218,6 +232,11 @@ public class MainActivity extends Activity {
     public void onResume(){
 
         super.onResume();
+
+        int pencil_count = (int)MyAccount.getValue(this, "CNT");
+        //pc = (TextView) findViewById(R.id.pencil_count);
+        pc.setText(pencil_count+"");
+        isAvailable();
 
         banbok();
     }
@@ -463,6 +482,42 @@ public class MainActivity extends Activity {
     }   //하단 월 horizontalscroll이 visible 됐을대
 
 
+    private void isAvailable() {
+        if((boolean)MyAccount.getValue(this, "AVAILABLE")) {
+
+            String STARTAT = (String) MyAccount.getValue(this, "STARTAT");
+
+            DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            try {
+                Date startted_at = sdFormat.parse(STARTAT);
+                Date today = new Date();
+
+                compareAndSetAvailable(startted_at, today);
+            } catch (ParseException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void compareAndSetAvailable(Date prev, Date current) {
+        int ONEWEEK = 1000 * 60 * 60 * 24 * 7;
+        int diff = (int)(current.getTime() - prev.getTime());
+
+        if(diff > ONEWEEK) {
+            MyAccount.setFontAvailable(this, false);
+        }
+
+/*
+        int ONEMIN = 1000 * 60;
+        if(diff > ONEMIN) {
+            MyAccount.setFontAvailable(this, false);
+            MyAccount.setFont(this, "nanum_myeongjo");
+            MyAccount.setFontStartTime(this, "");
+
+        }
+*/
+    }
 
 
 
