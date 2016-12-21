@@ -7,10 +7,10 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="320dp"
+        android:layout_width="340dp"
         android:layout_height="280dp"
         android:gravity="center"
-        android:padding="30dp"
+        android:padding="20dp"
         android:background="#fff">
 
         <LinearLayout
@@ -20,70 +20,80 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="55dp"
                 android:layout_marginBottom="20dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <Button
+                    android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:background="#fff"
                     android:onClick="onClick"
                     android:id="@+id/milkyway"
                     android:text="@string/milkyway"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <Button
+                    android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:background="#fff"
                     android:onClick="onClick"
                     android:id="@+id/nanum_gothic"
                     android:text="@string/nanum_gothic"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <Button
+                    android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:background="#fff"
                     android:onClick="onClick"
                     android:id="@+id/nanum_myeongjo"
                     android:text="@string/nanum_myeongjo"/>
             </LinearLayout>
 
+
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:gravity="center">
+
+                <Button
+                    android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:background="#fff"
                     android:onClick="onClick"
                     android:id="@+id/seoul_hangang"
                     android:text="@string/seoul_hangang"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <Button
+                    android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:background="#fff"
                     android:onClick="onClick"
                     android:id="@+id/spoqa_han_sans"
                     android:text="@string/spoqa_han_sans"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <Button
+                    android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:background="#fff"
                     android:onClick="onClick"
                     android:id="@+id/tfs_inklipquid"
                     android:text="@string/tfs_inklipquid"/>
@@ -96,7 +106,7 @@
             android:layout_width="match_parent"
             android:layout_height="0.3in"
             android:background="#ddd"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="50dp"
             android:gravity="center"
             android:id="@+id/buy"
             android:onClick="onClick"

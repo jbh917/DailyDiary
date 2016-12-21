@@ -287,11 +287,14 @@ public class WDailyActivity extends Activity {
                     // 연필 수 늘리기
                     // 연속 찾아서 ++ 되는 갯수 바꿔줘야함
                     // 광고 보면 *2배 적용해야함
-                    UnityAds.show(this, "rewardedVideo");
 
-                    int cnt = (int) MyAccount.getValue(this, "CNT");
-                    MyAccount.setPencilCount(this, cnt + 1);
-
+                    if(true) {
+                        UnityAds.show(this, "rewardedVideo");
+                        // 콜백에서 보상 줘야함 근데 콜백에서 context 어떻게 먹일까?
+                    } else {
+                        int cnt = (int) MyAccount.getValue(this, "CNT");
+                        MyAccount.setPencilCount(this, cnt + 1);
+                    }
                     /*********************************************/
 
                 }   //DB에 저장 되어있으면 갱신 없으면 생성

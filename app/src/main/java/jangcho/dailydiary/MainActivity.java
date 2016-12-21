@@ -2,6 +2,7 @@ package jangcho.dailydiary;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -60,6 +61,7 @@ public class MainActivity extends Activity {
         setTheme(android.R.style.Theme_DeviceDefault_NoActionBar_Fullscreen);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
 
         UnityAds.initialize(this, UNITYADS_KEY, unityAdsListener, false);
 

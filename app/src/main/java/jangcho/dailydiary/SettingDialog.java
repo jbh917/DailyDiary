@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,29 +29,44 @@ public class SettingDialog extends Activity {
     }
 
     public void onClick(View v) {
+
+        Button[] btn = {(Button) findViewById(R.id.milkyway),
+                (Button) findViewById(R.id.nanum_gothic),
+                (Button) findViewById(R.id.nanum_myeongjo),
+                (Button) findViewById(R.id.seoul_hangang),
+                (Button) findViewById(R.id.spoqa_han_sans),
+                (Button) findViewById(R.id.tfs_inklipquid)
+        };
+
         switch(v.getId()) {
             case R.id.milkyway:
                 MyAccount.setFont(this, "MILKYWAY");
+                setBorder(btn);
                 break;
 
             case R.id.nanum_gothic:
                 MyAccount.setFont(this, "nanum_gothic");
+                setBorder(btn);
                 break;
 
             case R.id.nanum_myeongjo:
                 MyAccount.setFont(this, "nanum_myeongjo");
+                setBorder(btn);
                 break;
 
             case R.id.seoul_hangang:
                 MyAccount.setFont(this, "seoul_hangang");
+                setBorder(btn);
                 break;
 
             case R.id.spoqa_han_sans:
                 MyAccount.setFont(this, "spoqa_han_sans");
+                setBorder(btn);
                 break;
 
             case R.id.tfs_inklipquid:
                 MyAccount.setFont(this, "tfs_inkliqpuid");
+                setBorder(btn);
                 break;
 
             case R.id.buy:
@@ -82,17 +98,56 @@ public class SettingDialog extends Activity {
                 "SpoqaHanSansRegular.ttf",
                 "THEFACESHOP_INKLIPQUID.otf"};
 
-        TextView[] tv = {(TextView) findViewById(R.id.milkyway),
-                (TextView) findViewById(R.id.nanum_gothic),
-                (TextView) findViewById(R.id.nanum_myeongjo),
-                (TextView) findViewById(R.id.seoul_hangang),
-                (TextView) findViewById(R.id.spoqa_han_sans),
-                (TextView) findViewById(R.id.tfs_inklipquid)
+        Button[] btn = {(Button) findViewById(R.id.milkyway),
+                (Button) findViewById(R.id.nanum_gothic),
+                (Button) findViewById(R.id.nanum_myeongjo),
+                (Button) findViewById(R.id.seoul_hangang),
+                (Button) findViewById(R.id.spoqa_han_sans),
+                (Button) findViewById(R.id.tfs_inklipquid)
         };
+
+        setBorder(btn);
+
 
         for(int i=0; i<fonts.length; i++) {
             Typeface tf = Typeface.createFromAsset(getAssets(), fonts[i]);
-            tv[i].setTypeface(tf);
+            btn[i].setTypeface(tf);
+
         }
     }
+
+    private void setBorder(Button[] btn) {
+        clearBorder(btn);
+
+        String FONT_TYPE = (String)MyAccount.getValue(this, "FONT");
+
+        switch(FONT_TYPE) {
+            case "MILKYWAY": {
+                btn[0].setBackgroundResource(R.drawable.border);
+                break;
+            } case "nanum_gothic": {
+                btn[1].setBackgroundResource(R.drawable.border);
+                break;
+            } case "nanum_myeongjo": {
+                btn[2].setBackgroundResource(R.drawable.border);
+                break;
+            } case "seoul_hangang": {
+                btn[3].setBackgroundResource(R.drawable.border);
+                break;
+            } case "spoqa_han_sans": {
+                btn[4].setBackgroundResource(R.drawable.border);
+                break;
+            } default: {
+                btn[5].setBackgroundResource(R.drawable.border);
+                break;
+            }
+        }
+    }
+
+    private void clearBorder(Button[] btn) {
+        for(int i=0; i<btn.length; i++) {
+            btn[i].setBackgroundResource(0);
+        }
+    }
+
 }
