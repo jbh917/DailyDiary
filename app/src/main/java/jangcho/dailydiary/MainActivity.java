@@ -387,6 +387,34 @@ public class MainActivity extends Activity {
             case R.id.main_month:{                          //하단 월 버튼 눌렀을 시
                 mhori.setVisibility(View.VISIBLE);
                 lin.setVisibility(View.GONE);
+
+
+                mhori.post(new Runnable() {
+                    public void run() {
+
+
+                        ImageButton temp=null;
+
+                        switch (curMonth){
+                            case 1: temp = (ImageButton)findViewById(R.id.jan); break;
+                            case 2: temp = (ImageButton)findViewById(R.id.feb);break;
+                            case 3: temp = (ImageButton)findViewById(R.id.mar);break;
+                            case 4: temp = (ImageButton)findViewById(R.id.apr);break;
+                            case 5: temp = (ImageButton)findViewById(R.id.may);break;
+                            case 6: temp = (ImageButton)findViewById(R.id.jun);break;
+                            case 7: temp = (ImageButton)findViewById(R.id.july);break;
+                            case 8: temp = (ImageButton)findViewById(R.id.aug);break;
+                            case 9: temp = (ImageButton)findViewById(R.id.sep);break;
+                            case 10: temp = (ImageButton)findViewById(R.id.oct);break;
+                            case 11: temp = (ImageButton)findViewById(R.id.nov);break;
+                            case 12: temp = (ImageButton)findViewById(R.id.dec);break;
+
+
+                        }
+                        mhori.scrollTo(temp.getLeft(),0);
+                    }
+                });
+
                 break;
             }
             case R.id.main_year:{                       //하단 년 버튼 눌렀을 시
@@ -507,6 +535,7 @@ public class MainActivity extends Activity {
     public void onClick1(View v){
 
         ImageButton temp1 = (ImageButton)findViewById(R.id.main_month);
+
 
 
         i_alphaid = v.getId();
