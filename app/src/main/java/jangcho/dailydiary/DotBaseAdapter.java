@@ -1,6 +1,7 @@
 package jangcho.dailydiary;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 
 public class DotBaseAdapter extends BaseAdapter{
     Context mContext =null;
+    AssetManager mAsset = null;
     ArrayList<Data> mData =null;
     LayoutInflater mLayoutInflater =null;
 
@@ -27,9 +29,10 @@ public class DotBaseAdapter extends BaseAdapter{
     AnimationDrawable frameAnimation;
 
 
-    public DotBaseAdapter(Context context, ArrayList<Data> data){
+    public DotBaseAdapter(Context context, AssetManager asset, ArrayList<Data> data){
         mContext = context;
-        mData =data;
+        mAsset = asset;
+        mData = data;
         mLayoutInflater = LayoutInflater.from(mContext);
 
     }
@@ -54,12 +57,14 @@ public class DotBaseAdapter extends BaseAdapter{
 
         if(mData.get(position).isDB){
             View itemLayout1 = mLayoutInflater.inflate(R.layout.content_view_layout,null);
-            String FONT_TYPE = (String)MyAccount.getValue(mContext, "FONT");
-            Util.setGlobalFont(mContext, itemLayout1, FONT_TYPE);
+            //Util.setGlobalFont(mContext, itemLayout1, FONT_TYPE);
 
             TextView content_content = (TextView) itemLayout1.findViewById(R.id.content_content);
             TextView content_week = (TextView) itemLayout1.findViewById(R.id.content_week);
             TextView content_day = (TextView) itemLayout1.findViewById(R.id.content_day);
+
+            String FONT_TYPE = (String)MyAccount.getValue(mContext, "FONT");
+            Util.setFont(content_content, FONT_TYPE, mAsset);
 
             weather = (ImageView)itemLayout1.findViewById(R.id.weather_ani);
 

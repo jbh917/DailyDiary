@@ -57,8 +57,11 @@ public class WDailyActivity extends Activity {
         String mmonth = "";
         String mweek = "";
 
-        String FONT_TYPE = (String) MyAccount.getValue(this, "FONT");
-        Util.setGlobalFont(this, getWindow().getDecorView(), FONT_TYPE);
+        //String FONT_TYPE = (String) MyAccount.getValue(this, "FONT");
+        //Util.setGlobalFont(this, getWindow().getDecorView(), FONT_TYPE);
+
+        String FONT_TYPE = (String)MyAccount.getValue(this, "FONT");
+        Util.setFont(editdaily, FONT_TYPE, getAssets());
 
         intent = getIntent();
 
@@ -183,8 +186,22 @@ public class WDailyActivity extends Activity {
         }
         editdaily.requestFocus();
 
+
+        String[] fonts = {"hankyoreh.TTF",
+                "godo.ttf",
+                "hanna.ttf",
+                "inklipquid.otf",
+                "nanum.ttf",
+                "spoqahansans.ttf"};
+
         String font_type = (String)MyAccount.getValue(this, "FONT");
-        daily.setTypeface(Typeface.createFromAsset(getAssets(), font_type));    //날짜 폰트 은하수
+        for(int i=0; i<fonts.length; i++) {
+            if(fonts[i].equals(font_type)) {
+                daily.setTypeface(Typeface.createFromAsset(getAssets(), fonts[i]));
+                break;
+            }
+        }
+
         daily.setText(mweek + " / " + mmonth + " " + intent.getIntExtra("day", 0) + " / " + intent.getIntExtra("year", 0));  //상단에 날짜 띄어줌
 
 

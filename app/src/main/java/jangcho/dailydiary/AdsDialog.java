@@ -50,7 +50,7 @@ public class AdsDialog extends Activity {
 
         switch (v.getId()){
             case R.id.adsview:{
-                UnityAds.show(this, "rewardedVideo");
+                //UnityAds.show(this, "rewardedVideo");
 
                 if(count!=0){
                     cnt = cnt + count*2;

@@ -31,13 +31,13 @@ public class SearchActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_layout);
 
-        String FONT_TYPE = (String)MyAccount.getValue(this, "FONT");
-        Util.setGlobalFont(this, getWindow().getDecorView(), FONT_TYPE);
+        //String FONT_TYPE = (String)MyAccount.getValue(this, "FONT");
+        //Util.setGlobalFont(this, getWindow().getDecorView(), FONT_TYPE);
 
         mData = new ArrayList<Data>();
         mTimeDB = TimeDB.getInstance(this);
         editText = (EditText)findViewById(R.id.search_edit);
-        mAdapter = new DotBaseAdapter(this, mData);
+        mAdapter = new DotBaseAdapter(this, getAssets(), mData);
         mListView = (ListView) findViewById(R.id.search_list_view);
         mListView.setAdapter(mAdapter);
 

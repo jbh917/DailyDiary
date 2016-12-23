@@ -71,13 +71,13 @@ public class MainActivity extends Activity {
 
         UnityAds.initialize(this, UNITYADS_KEY, unityAdsListener, false);
 
-        MyAccount.setFont(this, "hankyoreh.TTF");
+        MyAccount.setFont(this, "hankyoreh");
         MyAccount.setFontAvailable(this, false);
         MyAccount.setPencilCount(this, 100);
 
         isAvailable();
-        String FONT_TYPE = (String)MyAccount.getValue(this, "FONT");
-        Util.setGlobalFont(this, getWindow().getDecorView(), FONT_TYPE);
+        //String FONT_TYPE = (String)MyAccount.getValue(this, "FONT");
+        //Util.setGlobalFont(this, getWindow().getDecorView(), FONT_TYPE);
 
         int pencil_count = (int)MyAccount.getValue(this, "CNT");
         pc = (TextView) findViewById(R.id.pencil_count);
@@ -152,7 +152,7 @@ public class MainActivity extends Activity {
         }
 
 
-        mAdapter = new DotBaseAdapter(this, mData);
+        mAdapter = new DotBaseAdapter(this, getAssets(), mData);
         mListView = (ListView) findViewById(R.id.list_view);
         mListView.setAdapter(mAdapter);
         mListView.post(new Runnable() {

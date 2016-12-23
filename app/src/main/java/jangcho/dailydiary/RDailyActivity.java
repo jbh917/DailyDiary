@@ -38,8 +38,8 @@ public class RDailyActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rdaily_activity_layout);
 
-        String FONT_TYPE = (String)MyAccount.getValue(this, "FONT");
-        Util.setGlobalFont(this, getWindow().getDecorView(), FONT_TYPE);
+
+        //Util.setGlobalFont(this, getWindow().getDecorView(), FONT_TYPE);
 
         mTimeDB = TimeDB.getInstance(this);
         mNewsDB = NewsDB.getInstance(this);
@@ -58,8 +58,8 @@ public class RDailyActivity extends Activity {
         day =intent.getIntExtra("day",0);
         week = intent.getIntExtra("week",0);
 
-
-
+        String FONT_TYPE = (String)MyAccount.getValue(this, "FONT");
+        Util.setFont(textdaily, FONT_TYPE, getAssets());
 
 
         ////////////DB 존재하면 내용을 append

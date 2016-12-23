@@ -41,8 +41,8 @@ public class NewsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.news_layout);
 
-        String FONT_TYPE = (String)MyAccount.getValue(this, "FONT");
-        Util.setGlobalFont(this, getWindow().getDecorView(), FONT_TYPE);
+        //String FONT_TYPE = (String)MyAccount.getValue(this, "FONT");
+        //Util.setGlobalFont(this, getWindow().getDecorView(), FONT_TYPE);
 
         textView1 =(TextView)findViewById(R.id.news_1);
         textView2 =(TextView)findViewById(R.id.news_2);
