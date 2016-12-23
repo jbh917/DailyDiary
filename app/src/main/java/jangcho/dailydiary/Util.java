@@ -22,17 +22,17 @@ public class Util {
                     View v = vg.getChildAt(i);
                     if (v instanceof TextView) {
                         if(font == "MILKYWAY") {
-                            ((TextView) v).setTypeface(Typeface.createFromAsset(context.getAssets(), "MILKYWAY.TTF"));
+                            ((TextView) v).setTypeface(Typeface.createFromAsset(context.getAssets(), "godo.ttf"));
                         } else if(font.equals("nanum_gothic")) {
-                            ((TextView) v).setTypeface(Typeface.createFromAsset(context.getAssets(), "NanumGothic.ttc"));
+                            ((TextView) v).setTypeface(Typeface.createFromAsset(context.getAssets(), "hanna.ttf"));
                         } else if(font.equals("nanum_myeongjo")) {
-                            ((TextView) v).setTypeface(Typeface.createFromAsset(context.getAssets(), "NanumMyeongjo.ttc"));
+                            ((TextView) v).setTypeface(Typeface.createFromAsset(context.getAssets(), "inklipquid.otf"));
                         } else if(font.equals("seoul_hangang")) {
-                            ((TextView) v).setTypeface(Typeface.createFromAsset(context.getAssets(), "SeoulHangangM.otf"));
+                            ((TextView) v).setTypeface(Typeface.createFromAsset(context.getAssets(), "nanum.ttf"));
                         } else if(font.equals("spoqa_han_sans")) {
-                            ((TextView) v).setTypeface(Typeface.createFromAsset(context.getAssets(), "SpoqaHanSansRegular.ttf"));
+                            ((TextView) v).setTypeface(Typeface.createFromAsset(context.getAssets(), "spoqahansans.ttf"));
                         } else {
-                            ((TextView) v).setTypeface(Typeface.createFromAsset(context.getAssets(), "THEFACESHOP_INKLIPQUID.otf"));
+                            ((TextView) v).setTypeface(Typeface.createFromAsset(context.getAssets(), "hankyoreh.TTF"));
                         }
                     }
                     setGlobalFont(context, v, font);

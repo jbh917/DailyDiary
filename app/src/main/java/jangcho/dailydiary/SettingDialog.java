@@ -60,37 +60,37 @@ public class SettingDialog extends Activity {
         boolean isAvailable = (boolean) MyAccount.getValue(this, "AVAILABLE");
 
         if(isAvailable) {
-            Button[] btn = {(Button) findViewById(R.id.milkyway),
-                    (Button) findViewById(R.id.nanum_gothic),
-                    (Button) findViewById(R.id.nanum_myeongjo),
-                    (Button) findViewById(R.id.seoul_hangang),
-                    (Button) findViewById(R.id.spoqa_han_sans),
-                    (Button) findViewById(R.id.tfs_inklipquid)
+            Button[] btn = {(Button) findViewById(R.id.hankyoreh),
+                    (Button) findViewById(R.id.godo),
+                    (Button) findViewById(R.id.hanna),
+                    (Button) findViewById(R.id.inklipquid),
+                    (Button) findViewById(R.id.nanum),
+                    (Button) findViewById(R.id.spoqahansans)
             };
 
             switch (v.getId()) {
-                case R.id.milkyway:
-                    MyAccount.setFont(this, "MILKYWAY");
+                case R.id.hankyoreh:
+                    MyAccount.setFont(this, "hankyoreh");
                     break;
 
-                case R.id.nanum_gothic:
-                    MyAccount.setFont(this, "nanum_gothic");
+                case R.id.godo:
+                    MyAccount.setFont(this, "godo");
                     break;
 
-                case R.id.nanum_myeongjo:
-                    MyAccount.setFont(this, "nanum_myeongjo");
+                case R.id.hanna:
+                    MyAccount.setFont(this, "hanna");
                     break;
 
-                case R.id.seoul_hangang:
-                    MyAccount.setFont(this, "seoul_hangang");
+                case R.id.inklipquid:
+                    MyAccount.setFont(this, "inklipquid");
                     break;
 
-                case R.id.spoqa_han_sans:
-                    MyAccount.setFont(this, "spoqa_han_sans");
+                case R.id.nanum:
+                    MyAccount.setFont(this, "nanum");
                     break;
 
-                case R.id.tfs_inklipquid:
-                    MyAccount.setFont(this, "tfs_inkliqpuid");
+                case R.id.spoqahansans:
+                    MyAccount.setFont(this, "spoqahansans");
                     break;
             }
             setBorder(btn);
@@ -102,19 +102,19 @@ public class SettingDialog extends Activity {
 
     private void initDialog() {
 
-        String[] fonts = {"MILKYWAY.TTF",
-                "NanumGothic.ttc",
-                "NanumMyeongjo.ttc",
-                "SeoulHangangM.otf",
-                "SpoqaHanSansRegular.ttf",
-                "THEFACESHOP_INKLIPQUID.otf"};
+        String[] fonts = {"hankyoreh.TTF",
+                "godo.ttf",
+                "hanna.ttf",
+                "inklipquid.otf",
+                "nanum.ttf",
+                "spoqahansans.ttf"};
 
-        Button[] btn = {(Button) findViewById(R.id.milkyway),
-                (Button) findViewById(R.id.nanum_gothic),
-                (Button) findViewById(R.id.nanum_myeongjo),
-                (Button) findViewById(R.id.seoul_hangang),
-                (Button) findViewById(R.id.spoqa_han_sans),
-                (Button) findViewById(R.id.tfs_inklipquid)
+        Button[] btn = {(Button) findViewById(R.id.hankyoreh),
+                (Button) findViewById(R.id.godo),
+                (Button) findViewById(R.id.hanna),
+                (Button) findViewById(R.id.inklipquid),
+                (Button) findViewById(R.id.nanum),
+                (Button) findViewById(R.id.spoqahansans)
         };
 
         setBorder(btn);
@@ -133,23 +133,23 @@ public class SettingDialog extends Activity {
         String FONT_TYPE = (String)MyAccount.getValue(this, "FONT");
 
         switch(FONT_TYPE) {
-            case "MILKYWAY": {
-                btn[0].setBackgroundResource(R.drawable.border);
-                break;
-            } case "nanum_gothic": {
+            case "godo": {
                 btn[1].setBackgroundResource(R.drawable.border);
                 break;
-            } case "nanum_myeongjo": {
+            } case "hanna": {
                 btn[2].setBackgroundResource(R.drawable.border);
                 break;
-            } case "seoul_hangang": {
+            } case "inklipquid": {
                 btn[3].setBackgroundResource(R.drawable.border);
                 break;
-            } case "spoqa_han_sans": {
+            } case "nanum": {
                 btn[4].setBackgroundResource(R.drawable.border);
                 break;
-            } default: {
+            } case "spoqahansans": {
                 btn[5].setBackgroundResource(R.drawable.border);
+                break;
+            } default: {
+                btn[0].setBackgroundResource(R.drawable.border);
                 break;
             }
         }

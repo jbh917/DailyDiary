@@ -70,11 +70,11 @@ public class MainActivity extends Activity {
 
 
         UnityAds.initialize(this, UNITYADS_KEY, unityAdsListener, false);
-/*
-        MyAccount.setFont(this, "nanum_myeongjo");
+
+        MyAccount.setFont(this, "hankyoreh.TTF");
         MyAccount.setFontAvailable(this, false);
         MyAccount.setPencilCount(this, 100);
-*/
+
         isAvailable();
         String FONT_TYPE = (String)MyAccount.getValue(this, "FONT");
         Util.setGlobalFont(this, getWindow().getDecorView(), FONT_TYPE);
@@ -568,13 +568,15 @@ public class MainActivity extends Activity {
 
         if(diff > ONEWEEK) {
             MyAccount.setFontAvailable(this, false);
+            MyAccount.setFont(this, "hankyoreh");
+            MyAccount.setFontStartTime(this, "");
         }
 
 /*
         int ONEMIN = 1000 * 60;
         if(diff > ONEMIN) {
             MyAccount.setFontAvailable(this, false);
-            MyAccount.setFont(this, "nanum_myeongjo");
+            MyAccount.setFont(this, "hankyoreh");
             MyAccount.setFontStartTime(this, "");
 
         }

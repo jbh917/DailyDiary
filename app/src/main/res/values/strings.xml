@@ -3,12 +3,12 @@
     <string name="buy">USE ALL FONT</string>
     <string name="cost">-56</string>
 
-    <string name="milkyway">MILKYWAY</string>
-    <string name="nanum_gothic">NANUM\nGOTHIC</string>
-    <string name="nanum_myeongjo">NANUM\nMYEONGJO</string>
-    <string name="seoul_hangang">SEOL\nHANGANG</string>
-    <string name="spoqa_han_sans">SPOQA\nHAN SANS</string>
-    <string name="tfs_inklipquid">INK\nLIPQUID</string>
+    <string name="hankyoreh">HANKYOREH</string>
+    <string name="godo">GODO</string>
+    <string name="hanna">B.D\nHANNA</string>
+    <string name="inklipquid">INK\nLIPQUID</string>
+    <string name="nanum">NANUM\nMYEONGJO</string>
+    <string name="spoqahansans">SPOQA\nHAN SANS</string>
 
 
 </resources>

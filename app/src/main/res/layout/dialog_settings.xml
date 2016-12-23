@@ -33,8 +33,8 @@
                     android:paddingRight="5dp"
                     android:background="#fff"
                     android:onClick="onClick"
-                    android:id="@+id/nanum_myeongjo"
-                    android:text="@string/nanum_myeongjo"/>
+                    android:id="@+id/hankyoreh"
+                    android:text="@string/hankyoreh"/>
                 <Button
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
@@ -43,8 +43,8 @@
                     android:paddingRight="5dp"
                     android:background="#fff"
                     android:onClick="onClick"
-                    android:id="@+id/milkyway"
-                    android:text="@string/milkyway"/>
+                    android:id="@+id/godo"
+                    android:text="@string/godo"/>
 
                 <Button
                     android:layout_width="100dp"
@@ -54,8 +54,8 @@
                     android:paddingRight="5dp"
                     android:background="#fff"
                     android:onClick="onClick"
-                    android:id="@+id/nanum_gothic"
-                    android:text="@string/nanum_gothic"/>
+                    android:id="@+id/hanna"
+                    android:text="@string/hanna"/>
 
             </LinearLayout>
 
@@ -73,8 +73,8 @@
                     android:paddingRight="5dp"
                     android:background="#fff"
                     android:onClick="onClick"
-                    android:id="@+id/seoul_hangang"
-                    android:text="@string/seoul_hangang"/>
+                    android:id="@+id/inklipquid"
+                    android:text="@string/inklipquid"/>
 
                 <Button
                     android:layout_width="100dp"
@@ -84,8 +84,8 @@
                     android:paddingRight="5dp"
                     android:background="#fff"
                     android:onClick="onClick"
-                    android:id="@+id/spoqa_han_sans"
-                    android:text="@string/spoqa_han_sans"/>
+                    android:id="@+id/nanum"
+                    android:text="@string/nanum"/>
 
                 <Button
                     android:layout_width="100dp"
@@ -95,8 +95,8 @@
                     android:paddingRight="5dp"
                     android:background="#fff"
                     android:onClick="onClick"
-                    android:id="@+id/tfs_inklipquid"
-                    android:text="@string/tfs_inklipquid"/>
+                    android:id="@+id/spoqahansans"
+                    android:text="@string/spoqahansans"/>
             </LinearLayout>
 
         </LinearLayout>

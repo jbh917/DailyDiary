@@ -183,7 +183,8 @@ public class WDailyActivity extends Activity {
         }
         editdaily.requestFocus();
 
-        daily.setTypeface(Typeface.createFromAsset(getAssets(), "MILKYWAY.TTF"));    //날짜 폰트 은하수
+        String font_type = (String)MyAccount.getValue(this, "FONT");
+        daily.setTypeface(Typeface.createFromAsset(getAssets(), font_type));    //날짜 폰트 은하수
         daily.setText(mweek + " / " + mmonth + " " + intent.getIntExtra("day", 0) + " / " + intent.getIntExtra("year", 0));  //상단에 날짜 띄어줌
 
 
