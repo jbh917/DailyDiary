@@ -2,8 +2,31 @@
 <LinearLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"    
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingTop="30dp"
+    android:paddingBottom="50dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="TODAY's NEWS"
+            android:textColor="#333"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="25dp"
+            />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,11 +52,11 @@
             android:layout_gravity="center"
             android:layout_weight="10"
             android:ellipsize="end"
-            
+            android:paddingLeft="10dp"
             android:maxLines="1"/>
 
         <ImageButton
-            android:layout_width="50dp"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
@@ -68,10 +91,11 @@
             android:layout_gravity="center"
             android:layout_weight="10"
             android:ellipsize="end"
+            android:paddingLeft="10dp"
             android:maxLines="1"/>
 
         <ImageButton
-            android:layout_width="50dp"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
@@ -106,10 +130,11 @@
             android:layout_gravity="center"
             android:layout_weight="10"
             android:ellipsize="end"
+            android:paddingLeft="10dp"
             android:maxLines="1"/>
 
         <ImageButton
-            android:layout_width="50dp"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
@@ -143,10 +168,11 @@
             android:layout_gravity="center"
             android:layout_weight="10"
             android:ellipsize="end"
+            android:paddingLeft="10dp"
             android:maxLines="1"/>
 
         <ImageButton
-            android:layout_width="50dp"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
@@ -181,10 +207,11 @@
             android:layout_gravity="center"
             android:layout_weight="10"
             android:ellipsize="end"
+            android:paddingLeft="10dp"
             android:maxLines="1"/>
 
         <ImageButton
-            android:layout_width="50dp"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
@@ -218,10 +245,11 @@
             android:layout_gravity="center"
             android:layout_weight="10"
             android:ellipsize="end"
+            android:paddingLeft="10dp"
             android:maxLines="1"/>
 
         <ImageButton
-            android:layout_width="50dp"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
@@ -255,10 +283,11 @@
             android:layout_gravity="center"
             android:layout_weight="10"
             android:ellipsize="end"
+            android:paddingLeft="10dp"
             android:maxLines="1"/>
 
         <ImageButton
-            android:layout_width="50dp"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
@@ -291,10 +320,11 @@
         android:layout_gravity="center"
         android:layout_weight="10"
         android:ellipsize="end"
+        android:paddingLeft="10dp"
         android:maxLines="1"/>
 
     <ImageButton
-        android:layout_width="50dp"
+        android:layout_width="30dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="1"

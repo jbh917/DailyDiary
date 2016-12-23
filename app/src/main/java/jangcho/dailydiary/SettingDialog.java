@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,21 +37,24 @@ public class SettingDialog extends Activity {
     public void onBuy(View v) {
 
         int cnt = (int)MyAccount.getValue(this, "CNT");
-        Log.e("before", cnt+"");
+        boolean isAvailable = (boolean) MyAccount.getValue(this, "AVAILABLE");
 
-        if(cnt > 56) {
-            MyAccount.setPencilCount(this, cnt - 56);
-            MyAccount.setFontAvailable(this, true);
-
-
-            DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date today = new Date();
-            String today_str = sdFormat.format(today);
-            MyAccount.setFontStartTime(this, today_str);
+        if(!isAvailable) {
+            if (cnt > 56) {
+                MyAccount.setPencilCount(this, cnt - 56);
+                MyAccount.setFontAvailable(this, true);
 
 
-        } else {
-            Toast.makeText(getApplicationContext(), "NOT ENOUGH PENCIL", Toast.LENGTH_LONG).show();
+                DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date today = new Date();
+                String today_str = sdFormat.format(today);
+                MyAccount.setFontStartTime(this, today_str);
+
+                LinearLayout buy_btn = (LinearLayout) findViewById(R.id.buy);
+                buy_btn.setVisibility(View.GONE);
+            } else {
+                Toast.makeText(getApplicationContext(), "NOT ENOUGH PENCIL", Toast.LENGTH_LONG).show();
+            }
         }
 
     }
@@ -123,6 +127,13 @@ public class SettingDialog extends Activity {
         for(int i=0; i<fonts.length; i++) {
             Typeface tf = Typeface.createFromAsset(getAssets(), fonts[i]);
             btn[i].setTypeface(tf);
+        }
+
+        boolean isAvailable = (boolean)MyAccount.getValue(this, "AVAILABLE");
+
+        if(isAvailable) {
+            LinearLayout buy_btn = (LinearLayout) findViewById(R.id.buy);
+            buy_btn.setVisibility(View.GONE);
         }
 
     }

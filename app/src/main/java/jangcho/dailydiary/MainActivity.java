@@ -70,11 +70,11 @@ public class MainActivity extends Activity {
 
 
         UnityAds.initialize(this, UNITYADS_KEY, unityAdsListener, false);
-
+/*
         MyAccount.setFont(this, "hankyoreh");
         MyAccount.setFontAvailable(this, false);
         MyAccount.setPencilCount(this, 100);
-
+*/
         isAvailable();
         //String FONT_TYPE = (String)MyAccount.getValue(this, "FONT");
         //Util.setGlobalFont(this, getWindow().getDecorView(), FONT_TYPE);

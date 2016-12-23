@@ -116,6 +116,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/buy"
+                android:textColor="#000"
                 android:textSize="8pt"/>
 
             <LinearLayout
@@ -133,6 +134,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
+                    android:textColor="#000"
                     android:text="@string/cost"
                     android:textSize="6pt"/>
             </LinearLayout>

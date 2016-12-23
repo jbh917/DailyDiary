@@ -14,34 +14,48 @@
         android:background="#ffffff">
 
 
+
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_gravity="right"
-            android:layout_weight="6"
-            android:text = "x"
             android:id="@+id/exit"
-            android:onClick="onClick"
-            />
+            android:background="#999"
+            android:text = "x"
+            android:textSize="6pt"
+            android:textColor="#000"
+            android:onClick="onClick" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal|center_vertical"
-            android:textSize="23dp"
+            android:textSize="8pt"
             android:layout_weight="3"
+            android:textColor="#000"
             android:id="@+id/adstext"
-            android:text="광고를 보시면 이전 일기를 작성할 수 있습니다."/>
+            android:text="@string/adinfo" />
 
 
-        <Button
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="광고보기"
+            android:layout_height="0.3in"
+            android:background="#ddd"
+            android:layout_marginTop="50dp"
+            android:gravity="center"
             android:id="@+id/adsview"
             android:onClick="onClick"
-            android:layout_weight="5"
-            />
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/showads"
+                android:textColor="#555"
+                android:textSize="8pt"/>
+
+
+        </LinearLayout>
 
     </LinearLayout>
 

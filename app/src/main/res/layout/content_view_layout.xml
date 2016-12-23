@@ -64,6 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
+                android:padding="10dp"
                 android:orientation="vertical"
                 android:background="@drawable/border"
                 >
@@ -72,8 +73,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:id="@+id/weather_ani"
-                    android:background="@drawable/border"/>
+                    android:id="@+id/weather_ani"/>
 
 
             </LinearLayout>

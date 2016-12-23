@@ -40,7 +40,7 @@ public class AdsDialog extends Activity {
         a =(TextView)findViewById(R.id.adstext);
 
         if(count!=0){
-            a.setText("광고를 보시면"+(count*2)+"개를 드립니다.");
+            a.setText("YOU CAN GET "+count+ "(x2) PENCIL IF YOU WATCH AD");
         }
 
     }
@@ -50,7 +50,7 @@ public class AdsDialog extends Activity {
 
         switch (v.getId()){
             case R.id.adsview:{
-                //UnityAds.show(this, "rewardedVideo");
+                UnityAds.show(this, "rewardedVideo");
 
                 if(count!=0){
                     cnt = cnt + count*2;
