@@ -46,30 +46,17 @@ public class AdsDialog extends Activity {
     }
 
     public void onClick(View v){
+        int cnt = (int) MyAccount.getValue(this, "CNT");
+
         switch (v.getId()){
             case R.id.adsview:{
-
-                int cnt = (int) MyAccount.getValue(this, "CNT");
                 UnityAds.show(this, "rewardedVideo");
 
                 if(count!=0){
-
-                    // 오늘
-
-                    /*********************************************/
-                    // 연필 수 늘리기
-                    // 연속 찾아서 ++ 되는 갯수 바꿔줘야함
-                    // 광고 보면 *2배 적용해야함
-
                     cnt = cnt + count*2;
                     MyAccount.setPencilCount(this, cnt);
-
-                    /*********************************************/
-
                 }else{
                     MyAccount.setPencilCount(this, cnt + 1);
-
-                    // 전꺼
 
                     final Intent intent = new Intent(getApplicationContext(), WDailyActivity.class);
 
@@ -94,8 +81,14 @@ public class AdsDialog extends Activity {
                 break;
 
             }
-            case R.id.exit: finish();break;
-
+            case R.id.exit: {
+                if(count!=0) {
+                    cnt = cnt + count;
+                    MyAccount.setPencilCount(this, cnt);
+                }
+                finish();
+                break;
+            }
 
         }
 
