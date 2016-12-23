@@ -307,6 +307,14 @@ public class WDailyActivity extends Activity {
                                 upRowValue.put("pencil_count", 0);
                                 mTimeDB.update(upRowValue, "year = ? AND month =? AND day = ? ", temp1);
 
+                                int dbcount = 0;    //DB에 저장될 count
+
+                                if(count==7){
+                                    dbcount =0;
+                                }else{
+                                    dbcount = count;
+                                }
+
 
                                     ContentValues addRowValue = new ContentValues();
                                     addRowValue.put("year", year);
@@ -314,15 +322,16 @@ public class WDailyActivity extends Activity {
                                     addRowValue.put("day", day);
                                     addRowValue.put("week", intent.getIntExtra("week", 0));
                                     addRowValue.put("content", editdaily.getText().toString());
-                                    addRowValue.put("pencil_count",(count+1));
+                                    addRowValue.put("pencil_count",(dbcount+1));
                                     addRowValue.put("weather", weathermode);
 
                                     long insertRecordId = mTimeDB.insert(addRowValue);
 
+
                                 if(count!=0){
                                     final Intent intent = new Intent(getApplicationContext(), AdsDialog.class);
 
-                                    intent.putExtra("count",count+1);
+                                    intent.putExtra("count",dbcount+1);
 
                                     Handler handler = new Handler();
                                     handler.postDelayed(new Runnable() {

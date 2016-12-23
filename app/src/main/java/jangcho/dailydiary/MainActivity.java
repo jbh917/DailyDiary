@@ -58,6 +58,8 @@ public class MainActivity extends Activity {
     final String UNITYADS_KEY = "1239782";
     final private UnityAdsListener unityAdsListener = new UnityAdsListener();
 
+    ImageButton curmonth = null;
+    Button curyear =null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,12 +97,6 @@ public class MainActivity extends Activity {
         ylin = (LinearLayout)findViewById(R.id.year_linear);
 
 
-        i_alphabutt = (ImageButton)findViewById(i_alphaid);
-        b_alphabutt = (Button)findViewById(b_alphaid);
-        ani = AnimationUtils.loadAnimation(this, R.anim.alpha);
-        i_alphabutt.startAnimation(ani);
-        b_alphabutt.startAnimation(ani);
-
         //현재 요일 구하기/////////////////////
         Calendar oCalendar = Calendar.getInstance();
         curYear = oCalendar.get(Calendar.YEAR);
@@ -117,8 +113,44 @@ public class MainActivity extends Activity {
         todayYear = curYear;
 
         ///////////////////////////////////////
+        curmonth = (ImageButton)findViewById(R.id.main_month);
+        curyear = (Button)findViewById(R.id.main_year);
+
+        switch (todayMonth){
+            case 1: curmonth.setImageResource(R.drawable.jan2); i_alphaid=R.id.jan;break;
+            case 2: curmonth.setImageResource(R.drawable.feb2);i_alphaid=R.id.feb;break;
+            case 3: curmonth.setImageResource(R.drawable.mar2);i_alphaid=R.id.mar;break;
+            case 4: curmonth.setImageResource(R.drawable.apr2);i_alphaid=R.id.apr;break;
+            case 5: curmonth.setImageResource(R.drawable.may2);i_alphaid=R.id.may;break;
+            case 6: curmonth.setImageResource(R.drawable.jun2);i_alphaid=R.id.jun;break;
+            case 7: curmonth.setImageResource(R.drawable.jul2);i_alphaid=R.id.july;break;
+            case 8: curmonth.setImageResource(R.drawable.aug2);i_alphaid=R.id.aug;break;
+            case 9: curmonth.setImageResource(R.drawable.sep2);i_alphaid=R.id.sep;break;
+            case 10: curmonth.setImageResource(R.drawable.oct2);i_alphaid=R.id.oct;break;
+            case 11: curmonth.setImageResource(R.drawable.nov2);i_alphaid=R.id.nov;break;
+            case 12: curmonth.setImageResource(R.drawable.dec2);i_alphaid=R.id.dec;break;
+
+        }
+
+        switch (todayYear){
+
+            case 2011:   curyear.setText("2011");b_alphaid=R.id.y2011; break;
+            case 2012:   curyear.setText("2012");b_alphaid=R.id.y2012; break;
+            case 2013:   curyear.setText("2013");b_alphaid=R.id.y2013; break;
+            case 2014:   curyear.setText("2014");b_alphaid=R.id.y2014; break;
+            case 2015:   curyear.setText("2015");b_alphaid=R.id.y2015; break;
+            case 2016:   curyear.setText("2016");b_alphaid=R.id.y2016; break;
+            case 2017:   curyear.setText("2017");b_alphaid=R.id.y2017; break;
+
+        }
 
 
+
+        i_alphabutt = (ImageButton)findViewById(i_alphaid);
+        b_alphabutt = (Button)findViewById(b_alphaid);
+        ani = AnimationUtils.loadAnimation(this, R.anim.alpha);
+        i_alphabutt.startAnimation(ani);
+        b_alphabutt.startAnimation(ani);
 
         ///현재달에 맞게 점 그리기//////////
         oCalendar.set(Calendar.YEAR,curYear);

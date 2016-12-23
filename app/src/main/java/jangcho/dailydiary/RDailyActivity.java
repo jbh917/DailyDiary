@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,6 +29,7 @@ public class RDailyActivity extends Activity {
     public NewsDB mNewsDB =null;
     Intent intent=null;
     int year,month,day,week,weather1;
+    ImageButton inews = null;
 
     ImageView weather = null;
     AnimationDrawable frameAnimation;
@@ -47,7 +49,7 @@ public class RDailyActivity extends Activity {
         TextView daily= (TextView)findViewById(R.id.r_daily);
         textdaily = (TextView)findViewById(R.id.r_daily_edit);
         weather =(ImageView)findViewById(R.id.weather_ani1);
-
+        inews = (ImageButton)findViewById(R.id.news);
 
         String mmonth ="";
         String mweek ="";
@@ -61,18 +63,30 @@ public class RDailyActivity extends Activity {
         String FONT_TYPE = (String)MyAccount.getValue(this, "FONT");
         Util.setFont(textdaily, FONT_TYPE, getAssets());
 
+        String[] columns1 = new String[]{"content"};
+
+
+        String[] temp1 = {""+year,""+month,""+day};
+        Cursor c = mNewsDB.query(columns1 ,"year = ? AND month =? AND day = ? ",temp1,null,null,null);
+        if(c != null && c.getCount()!=0){
+            inews.setVisibility(View.VISIBLE);
+            }else{
+            inews.setVisibility(View.GONE);
+
+        }
+
+
 
         ////////////DB 존재하면 내용을 append
         String[] columns = new String[]{"content","weather"};
 
 
         String[] temp = {""+year,""+month,""+day};
-        Cursor c = mTimeDB.query(columns ,"year = ? AND month =? AND day = ? ",temp,null,null,null);
-        if(c != null && c.getCount()!=0){
+        Cursor c1 = mTimeDB.query(columns ,"year = ? AND month =? AND day = ? ",temp,null,null,null);
+        if(c1 != null && c1.getCount()!=0){
 
-            c.moveToFirst();
-            textdaily.setText(c.getString(0));
-            weather1 = c.getInt(1);
+        }else{
+
         }
         /////////////////////////////////////////
 
