@@ -21,6 +21,7 @@ import java.util.Date;
 
 public class SettingDialog extends Activity {
 
+    Typeface tf;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,8 +123,8 @@ public class SettingDialog extends Activity {
         for(int i=0; i<fonts.length; i++) {
             Typeface tf = Typeface.createFromAsset(getAssets(), fonts[i]);
             btn[i].setTypeface(tf);
-
         }
+
     }
 
     private void setBorder(Button[] btn) {

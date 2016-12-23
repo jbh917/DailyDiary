@@ -36,7 +36,8 @@ public class TimeDB {
                 "day        INTEGER,"+
                 "week        INTEGER,"+
                 "weather    INTEGER,"+
-                "Content        TEXT);"
+                "pencil_count      INTEGER,"+
+                "content        TEXT);"
         );      //DB는 id,year,month,day,week,content 값을 저장한다.
 
 
