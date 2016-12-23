@@ -75,7 +75,7 @@ public class RDailyActivity extends Activity {
 
         }
 
-
+        c.close();
 
         ////////////DB 존재하면 내용을 append
         String[] columns = new String[]{"content","weather"};
@@ -84,12 +84,15 @@ public class RDailyActivity extends Activity {
         String[] temp = {""+year,""+month,""+day};
         Cursor c1 = mTimeDB.query(columns ,"year = ? AND month =? AND day = ? ",temp,null,null,null);
         if(c1 != null && c1.getCount()!=0){
+            c1.moveToFirst();
+            textdaily.setText(c1.getString(0));
+            weather1 = c1.getInt(1);
 
         }else{
 
         }
         /////////////////////////////////////////
-
+        c1.close();
         switch(weather1){
             case 0: weather.setBackgroundResource(R.drawable.sunny_animation); break;
             case 1: weather.setBackgroundResource(R.drawable.cloud_animation); break;
@@ -165,7 +168,7 @@ public class RDailyActivity extends Activity {
                 }
 
 
-
+                c.close();
 
                 break;
 

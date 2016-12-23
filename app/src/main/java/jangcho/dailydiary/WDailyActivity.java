@@ -67,7 +67,7 @@ public class WDailyActivity extends Activity {
 
         //////날씨 관련///////////
 
-        weathermode = 1;
+        weathermode = 0;
         weather_id = R.id.sunny;
         weather = (ImageView) findViewById(weather_id);
 

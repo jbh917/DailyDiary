@@ -40,7 +40,7 @@ public class SettingDialog extends Activity {
         boolean isAvailable = (boolean) MyAccount.getValue(this, "AVAILABLE");
 
         if(!isAvailable) {
-            if (cnt > 56) {
+            if (cnt >= 56) {
                 MyAccount.setPencilCount(this, cnt - 56);
                 MyAccount.setFontAvailable(this, true);
 

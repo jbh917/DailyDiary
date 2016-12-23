@@ -630,7 +630,7 @@ public class MainActivity extends Activity {
 
         if(diff > ONEWEEK) {
             MyAccount.setFontAvailable(this, false);
-            MyAccount.setFont(this, "hankyoreh");
+            MyAccount.setFont(this, "nanum");
             MyAccount.setFontStartTime(this, "");
         }
 
