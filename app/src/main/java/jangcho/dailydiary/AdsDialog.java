@@ -20,7 +20,9 @@ public class AdsDialog extends Activity {
     Intent intent=null;
     int year,month,day,week;
     int count;
-    TextView a;
+    TextView top;
+    TextView bottom;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,10 +39,13 @@ public class AdsDialog extends Activity {
         week = intent.getIntExtra("week",0);
         count = intent.getIntExtra("count",0);
 
-        a =(TextView)findViewById(R.id.adstext);
+        top =(TextView)findViewById(R.id.adstext);
+        bottom =(TextView)findViewById(R.id.adstext2);
+
 
         if(count!=0){
-            a.setText("YOU CAN GET "+count+ "(x2) PENCIL IF YOU WATCH AD");
+            top.setText("YOU CAN GET "+count+ "(x2) PENCIL IF YOU WATCH AD");
+            bottom.setVisibility(View.GONE);
         }
 
     }
