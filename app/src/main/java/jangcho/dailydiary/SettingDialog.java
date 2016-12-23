@@ -138,6 +138,11 @@ public class SettingDialog extends Activity {
 
     }
 
+    public void onResume(){
+        super.onResume();
+        initDialog();
+    }
+
     private void setBorder(Button[] btn) {
         clearBorder(btn);
 
