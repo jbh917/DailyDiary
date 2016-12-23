@@ -24,7 +24,7 @@ public class MyAccount {
         } else if(key.equals("AVAILABLE")) {
             return getPrefs(context).getBoolean(key, false);
         } else if(key.equals("FONT")) {
-            return getPrefs(context).getString(key, "hankyoreh");
+            return getPrefs(context).getString(key, "nanum");
         } else {
             return getPrefs(context).getString(key, "");
         }

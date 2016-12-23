@@ -71,7 +71,7 @@ public class MainActivity extends Activity {
 
         UnityAds.initialize(this, UNITYADS_KEY, unityAdsListener, false);
 /*
-        MyAccount.setFont(this, "hankyoreh");
+        MyAccount.setFont(this, "nanum");
         MyAccount.setFontAvailable(this, false);
         MyAccount.setPencilCount(this, 100);
 */
