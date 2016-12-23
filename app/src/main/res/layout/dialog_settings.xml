@@ -105,7 +105,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0.3in"
-            android:background="#ddd"
+            android:background="#444"
             android:layout_marginTop="50dp"
             android:gravity="center"
             android:id="@+id/buy"
@@ -116,7 +116,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/buy"
-                android:textColor="#000"
+                android:textStyle="bold"
+                android:textColor="#ddd"
                 android:textSize="8pt"/>
 
             <LinearLayout
@@ -134,9 +135,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:textColor="#000"
+                    android:textColor="#ddd"
                     android:text="@string/cost"
                     android:textSize="6pt"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="#ddd"
+                    android:text="@string/oneweek"
+                    android:textSize="4pt"/>
             </LinearLayout>
 
         </LinearLayout>
