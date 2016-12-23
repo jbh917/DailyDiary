@@ -106,6 +106,9 @@
         android:layout_height="match_parent"
         android:id="@+id/w_daily_edit"
         android:layout_weight="1"
+        android:textSize="20dp"
+        android:textCursorDrawable="@drawable/cursor"
+        android:lineSpacingExtra="15dp"
         android:autoLink="web"
         android:background="@null">
 

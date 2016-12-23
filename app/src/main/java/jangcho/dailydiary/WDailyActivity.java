@@ -228,6 +228,8 @@ public class WDailyActivity extends Activity {
                 Calendar oCalendar = Calendar.getInstance();
                 int curHour = oCalendar.get(Calendar.HOUR);
                 int curMinute = oCalendar.get(Calendar.MINUTE);
+                String curMin_str = String.format("%02d", curMinute);
+
                 int curNoon = oCalendar.get(Calendar.AM_PM); // 0이면 AM 1이면 PM
                 String tempNoon;
                 if (curNoon == 0) {
@@ -236,7 +238,7 @@ public class WDailyActivity extends Activity {
                     tempNoon = "PM";
                 }
 
-                editdaily.append(tempNoon + " " + curHour + " : " + curMinute);
+                editdaily.append(tempNoon + " " + curHour + " : " + curMin_str);
                 break;
 
 

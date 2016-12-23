@@ -84,7 +84,9 @@ public class SearchActivity extends Activity {
                             data.tempYear = c.getInt(1);
                             data.tempMonth = c.getInt(2);
                             data.tempDay = c.getInt(3);
-                            data.tempContent = "" + data.tempYear + "/" + data.tempMonth + "/" + data.tempDay + "\n" + c.getString(4);
+                            String tempDay_str = String.format("%02d", data.tempDay);
+
+                            data.tempContent = "" + data.tempYear + "/" + data.tempMonth + "/" + tempDay_str + "\n" + c.getString(4);
                             data.tempWeek = c.getInt(5);
                             data.weather=c.getInt(6);
                             data.isDB = true;

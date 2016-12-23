@@ -55,7 +55,7 @@ public class AdsDialog extends Activity {
                 if(count!=0){
                     cnt = cnt + count*2;
                     MyAccount.setPencilCount(this, cnt);
-                }else{
+                } else {
                     MyAccount.setPencilCount(this, cnt + 1);
 
                     final Intent intent = new Intent(getApplicationContext(), WDailyActivity.class);
@@ -73,8 +73,6 @@ public class AdsDialog extends Activity {
                             finish();
                         }
                     }, 250);
-
-
                 }
 
                 finish();
