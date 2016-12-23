@@ -28,7 +28,7 @@
             android:id="@+id/pencil_count"
             />
 
-    </LinearLayout>>
+    </LinearLayout>
 
     <ListView
         android:layout_width="match_parent"
