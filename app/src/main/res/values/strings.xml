@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">DailyDiary</string>
+    <string name="app_name">날마다 일기</string>
     <string name="buy">USE ALL FONT</string>
     <string name="cost">-56</string>
 
-    <string name="showads">SHOW ADVERTISEMENT</string>
-    <string name="adinfo">YOU CAN WRITE PREV ONE\nIF YOU WATCH AD</string>
-    <string name="adinfo2">ALSO GET ONE PENCIL!</string>
+    <string name="showads">광고 보기</string>
+    <string name="adinfo">전날 일기를 쓰려면\n광고를 봐야합니다.</string>
+    <string name="adinfo2">연필 1개를 추가로 드려요!</string>
     <string name="oneweek">(1 week)</string>
 
 

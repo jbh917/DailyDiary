@@ -53,6 +53,10 @@ public class NewsActivity extends Activity {
         textView7 =(TextView)findViewById(R.id.news_7);
         textView8 =(TextView)findViewById(R.id.news_8);
 
+
+
+
+
         mNewsDB = NewsDB.getInstance(this);
         intent = getIntent();
 

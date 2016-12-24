@@ -44,7 +44,7 @@ public class AdsDialog extends Activity {
 
 
         if(count!=0){
-            top.setText("YOU CAN GET "+count+ "(x2) PENCIL IF YOU WATCH AD");
+            top.setText("광고를 보시면 \n"+count+ "개의 연필을 추가로 드립니다.");
             bottom.setVisibility(View.GONE);
         }
 

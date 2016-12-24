@@ -25,11 +25,20 @@ public class MyAccount {
             return getPrefs(context).getBoolean(key, false);
         } else if(key.equals("FONT")) {
             return getPrefs(context).getString(key, "nanum");
+        } else if(key.equals("REVIEW")) {
+            return getPrefs(context).getInt(key, 0);
         } else {
             return getPrefs(context).getString(key, "");
         }
 
     }
+
+    public static void setWriteReview(Context context, int value) {
+        SharedPreferences.Editor editor = getPrefs(context).edit();
+        editor.putInt("REVIEW", value);
+        editor.commit();
+    }   //0이면 안쓴상태 1이면 쓴상태
+
 
     public static void setPencilCount(Context context, int value) {
         SharedPreferences.Editor editor = getPrefs(context).edit();

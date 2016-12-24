@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.graphics.drawable.AnimationDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
@@ -23,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -38,6 +40,11 @@ public class MainActivity extends Activity {
 
     int curYear, curMonth, curDay, curHour, curMinute, curNoon, curSecond, curWeek;     //현재 년,월,일,시간,분,낮밤,초,요일
     int todayYear, todayMonth, todayDay ;    //오늘 년/달/일
+
+
+    private final long FINISH_INTERVAL_TIME = 2000;
+    private long backPressedTime = 0;
+    boolean isclickday =false;
 
     ArrayList<Data> mData = null;       //현재달의 정보 저장한 ArrayList
     ListView mListView = null;
@@ -313,7 +320,48 @@ public class MainActivity extends Activity {
 
 
     /////////////////////////////////////////////
+////// 취소버튼
+    public void onBackPressed() {
+        long tempTime = System.currentTimeMillis();
+        long intervalTime = tempTime - backPressedTime;
 
+        if (0 <= intervalTime && FINISH_INTERVAL_TIME >= intervalTime)
+        {
+
+            if((int)MyAccount.getValue(this,"REVIEW")==0){
+                final Intent intent = new Intent(getApplicationContext(), ReviewDialog.class);
+
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(intent);
+                    }
+                }, 250);
+
+            }else{
+                super.onBackPressed();
+            }
+
+        }
+        else
+        {
+            if(isclickday){
+                lin.setVisibility(View.VISIBLE);
+                ylin.setVisibility(View.GONE);
+                mhori.setVisibility(View.GONE);
+                isclickday=false;
+            }else{
+                backPressedTime = tempTime;
+                Toast.makeText(getApplicationContext(), "Press again to close the application.", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
+
+//////////
 
     public void onResume(){
 
@@ -326,6 +374,8 @@ public class MainActivity extends Activity {
 
         banbok();
     }
+
+
 
 
     public void banbok(){       //리스트뷰 그려주는 함수
@@ -418,6 +468,7 @@ public class MainActivity extends Activity {
     public void onClick(View v){
         switch(v.getId()){
             case R.id.main_month:{                          //하단 월 버튼 눌렀을 시
+                isclickday=true;
                 mhori.setVisibility(View.VISIBLE);
                 lin.setVisibility(View.GONE);
 
@@ -451,6 +502,7 @@ public class MainActivity extends Activity {
                 break;
             }
             case R.id.main_year:{                       //하단 년 버튼 눌렀을 시
+                isclickday=true;
                 lin.setVisibility(View.GONE);
                 ylin.setVisibility(View.VISIBLE);
                 break;
@@ -562,7 +614,7 @@ public class MainActivity extends Activity {
         banbok();
         lin.setVisibility(View.VISIBLE);
         ylin.setVisibility(View.GONE);
-
+        isclickday=false;
     }
 
     public void onClick1(View v){
@@ -601,6 +653,7 @@ public class MainActivity extends Activity {
 
         banbok();
 
+        isclickday=true;
         mhori.setVisibility(View.GONE);
         lin.setVisibility(View.VISIBLE);
     }   //하단 월 horizontalscroll이 visible 됐을대
