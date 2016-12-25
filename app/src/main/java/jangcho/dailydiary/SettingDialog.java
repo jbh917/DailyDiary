@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.unity3d.ads.UnityAds;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -32,6 +34,21 @@ public class SettingDialog extends Activity {
         setContentView(R.layout.dialog_settings);
 
         initDialog();
+    }
+
+    public void onClickAd(View v){
+
+        if(!UnityAds.isReady()){
+            Toast.makeText(getApplicationContext(), "광고준비가 되지 않았습니다. \n잠시후 다시 눌러주세요", Toast.LENGTH_SHORT).show();
+        }else{
+            int cnt = (int) MyAccount.getValue(this, "CNT");
+            UnityAds.show(this, "rewardedVideo");
+            MyAccount.setPencilCount(this, cnt + 1);
+        }
+
+
+
+
     }
 
     public void onBuy(View v) {

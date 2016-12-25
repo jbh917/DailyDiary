@@ -39,8 +39,7 @@
                 android:textSize="8pt"
                 android:layout_weight="3"
                 android:textColor="#000"
-                android:id="@+id/adstext"
-                android:text="@string/adinfo" />
+                android:id="@+id/adstext"/>
 
             <TextView
                 android:layout_marginTop="10dp"
@@ -50,8 +49,7 @@
                 android:textSize="5pt"
                 android:layout_weight="3"
                 android:textColor="#000"
-                android:id="@+id/adstext2"
-                android:text="@string/adinfo2" />
+                android:id="@+id/adstext2"/>
         </LinearLayout>
 
         <LinearLayout

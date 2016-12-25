@@ -78,22 +78,32 @@ public class SearchActivity extends Activity {
                 }else {
                     String[] columns = new String[]{"_id", "year", "month", "day", "content", "week","weather"};
                     Cursor c = mTimeDB.query(columns, "content LIKE '%" + s.toString() + "%'", null, null, null, "year ASC, month ASC, day ASC");
-                    if (c != null) {
-                        while (c.moveToNext()) {
-                            Data data = new Data();
-                            data.tempYear = c.getInt(1);
-                            data.tempMonth = c.getInt(2);
-                            data.tempDay = c.getInt(3);
-                            String tempDay_str = String.format("%02d", data.tempDay);
 
-                            data.tempContent = "" + data.tempYear + "/" + data.tempMonth + "/" + tempDay_str + "\n" + c.getString(4);
-                            data.tempWeek = c.getInt(5);
-                            data.weather=c.getInt(6);
-                            data.isDB = true;
-                            mData.add(data);
+                    try{
+                        if (c != null) {
+                            while (c.moveToNext()) {
+                                Data data = new Data();
+                                data.tempYear = c.getInt(1);
+                                data.tempMonth = c.getInt(2);
+                                data.tempDay = c.getInt(3);
+                                String tempDay_str = String.format("%02d", data.tempDay);
+
+                                data.tempContent = "" + data.tempYear + "/" + data.tempMonth + "/" + tempDay_str + "\n" + c.getString(4);
+                                data.tempWeek = c.getInt(5);
+                                data.weather=c.getInt(6);
+                                data.isDB = true;
+                                mData.add(data);
+                            }
+
                         }
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }finally {
                         c.close();
                     }
+
+
+
                 }
 
                 mAdapter.notifyDataSetChanged();

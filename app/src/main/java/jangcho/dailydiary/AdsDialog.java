@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.unity3d.ads.UnityAds;
 
@@ -55,32 +56,39 @@ public class AdsDialog extends Activity {
 
         switch (v.getId()){
             case R.id.adsview:{
-                UnityAds.show(this, "rewardedVideo");
+                if(!UnityAds.isReady()){
+                    Toast.makeText(getApplicationContext(), "광고준비가 되지 않았습니다. 잠시후 다시 눌러주세요", Toast.LENGTH_SHORT).show();
+                }else{
+                    UnityAds.show(this, "rewardedVideo");
 
-                if(count!=0){
-                    cnt = cnt + count*2;
-                    MyAccount.setPencilCount(this, cnt);
-                } else {
-                    MyAccount.setPencilCount(this, cnt + 1);
+                    if(count!=0){
+                        cnt = cnt + count*2;
+                        MyAccount.setPencilCount(this, cnt);
+                    } else {
+                        MyAccount.setPencilCount(this, cnt + 1);
 
-                    final Intent intent = new Intent(getApplicationContext(), WDailyActivity.class);
+                        final Intent intent = new Intent(getApplicationContext(), WDailyActivity.class);
 
-                    intent.putExtra("year", year);
-                    intent.putExtra("month", month);
-                    intent.putExtra("day", day);
-                    intent.putExtra("week", week);
+                        intent.putExtra("year", year);
+                        intent.putExtra("month", month);
+                        intent.putExtra("day", day);
+                        intent.putExtra("week", week);
 
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            startActivity(intent);
-                            finish();
-                        }
-                    }, 250);
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                startActivity(intent);
+                                finish();
+                            }
+                        }, 250);
+                    }
+
+                    finish();
+
                 }
 
-                finish();
+
                 break;
 
             }

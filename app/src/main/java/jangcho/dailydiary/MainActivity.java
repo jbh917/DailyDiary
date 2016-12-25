@@ -7,8 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
-import android.graphics.drawable.AnimationDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
@@ -20,7 +18,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -64,6 +61,7 @@ public class MainActivity extends Activity {
 
     final String UNITYADS_KEY = "1239782";
     final private UnityAdsListener unityAdsListener = new UnityAdsListener();
+    Context context;
 
     ImageButton curmonth = null;
     Button curyear =null;
@@ -78,7 +76,10 @@ public class MainActivity extends Activity {
         StrictMode.setThreadPolicy(policy);
 
 
+        context = this;
+
         UnityAds.initialize(this, UNITYADS_KEY, unityAdsListener, false);
+
 /*
         MyAccount.setFont(this, "nanum");
         MyAccount.setFontAvailable(this, false);
@@ -179,13 +180,21 @@ public class MainActivity extends Activity {
             String[] columns = new String[]{"content","weather"};
             String[] temp = {""+data.tempYear,""+data.tempMonth,""+i};
             Cursor c = mTimeDB.query(columns ,"year = ? AND month =? AND day = ? ",temp,null,null,null);
-            if(c != null && c.getCount()!=0){
-                data.isDB = true;
-                c.moveToFirst();
-                data.tempContent = c.getString(0);
-                data.weather = c.getInt(1);
+
+            try{
+                if(c != null && c.getCount()!=0){
+                    data.isDB = true;
+                    c.moveToFirst();
+                    data.tempContent = c.getString(0);
+                    data.weather = c.getInt(1);
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }finally {
+                c.close();
             }
-            c.close();
+
+
 
 
             mData.add(0, data);
@@ -216,29 +225,11 @@ public class MainActivity extends Activity {
 
                 String[] temp = {""+mData.get(position).tempYear,""+mData.get(position).tempMonth,""+mData.get(position).tempDay};
                 Cursor c = mTimeDB.query(columns ,"year = ? AND month =? AND day = ? ",temp,null,null,null);
-                if(c != null && c.getCount()!=0){
 
-                    final Intent intent = new Intent(getApplicationContext(), RDailyActivity.class);
+                try{
+                    if(c != null && c.getCount()!=0){
 
-                    intent.putExtra("year", mData.get(position).tempYear);
-                    intent.putExtra("month", mData.get(position).tempMonth);
-                    intent.putExtra("day", mData.get(position).tempDay);
-                    intent.putExtra("week", mData.get(position).tempWeek);
-
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            startActivity(intent);
-                        }
-                    }, 250);
-
-
-
-                }else{
-                    if(todayYear!=mData.get(position).tempYear||todayMonth!=mData.get(position).tempMonth||todayDay!=mData.get(position).tempDay){
-
-                        final Intent intent = new Intent(getApplicationContext(), AdsDialog.class);
+                        final Intent intent = new Intent(getApplicationContext(), RDailyActivity.class);
 
                         intent.putExtra("year", mData.get(position).tempYear);
                         intent.putExtra("month", mData.get(position).tempMonth);
@@ -252,29 +243,56 @@ public class MainActivity extends Activity {
                                 startActivity(intent);
                             }
                         }, 250);
+
 
 
                     }else{
-                        final Intent intent = new Intent(getApplicationContext(), WDailyActivity.class);
+                        if(todayYear!=mData.get(position).tempYear||todayMonth!=mData.get(position).tempMonth||todayDay!=mData.get(position).tempDay){
 
-                        intent.putExtra("year", mData.get(position).tempYear);
-                        intent.putExtra("month", mData.get(position).tempMonth);
-                        intent.putExtra("day", mData.get(position).tempDay);
-                        intent.putExtra("week", mData.get(position).tempWeek);
+                            final Intent intent = new Intent(getApplicationContext(), WDailyActivity.class);
 
-                        Handler handler = new Handler();
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                startActivity(intent);
-                            }
-                        }, 250);
+                            intent.putExtra("year", mData.get(position).tempYear);
+                            intent.putExtra("month", mData.get(position).tempMonth);
+                            intent.putExtra("day", mData.get(position).tempDay);
+                            intent.putExtra("week", mData.get(position).tempWeek);
+
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    startActivity(intent);
+                                }
+                            }, 250);
+
+
+                        }else{
+                            final Intent intent = new Intent(getApplicationContext(), WDailyActivity.class);
+
+                            intent.putExtra("year", mData.get(position).tempYear);
+                            intent.putExtra("month", mData.get(position).tempMonth);
+                            intent.putExtra("day", mData.get(position).tempDay);
+                            intent.putExtra("week", mData.get(position).tempWeek);
+
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    startActivity(intent);
+                                }
+                            }, 250);
+
+                        }
+
+
 
                     }
 
-
-
+                }catch (Exception e){
+                    e.printStackTrace();
+                }finally {
+                    c.close();
                 }
+
 
 
 
@@ -354,7 +372,7 @@ public class MainActivity extends Activity {
                 isclickday=false;
             }else{
                 backPressedTime = tempTime;
-                Toast.makeText(getApplicationContext(), "Press again to close the application.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "한번더 누르면 앱이 종료됩니다.", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -384,21 +402,30 @@ public class MainActivity extends Activity {
             mData.clear();
             String[] columns = new String[]{"_id", "year", "month", "day", "content", "week","weather"};
             Cursor c = mTimeDB.query(columns, "year = '" + curYear + "' AND month = '" + curMonth + "'", null, null, null, "day ASC");
-            if (c != null) {
-                while (c.moveToNext()) {
-                    Data data = new Data();
-                    data.tempYear = c.getInt(1);
-                    data.tempMonth = c.getInt(2);
-                    data.tempDay = c.getInt(3);
-                    data.tempContent = c.getString(4);
-                    data.tempWeek = c.getInt(5);
-                    data.weather = c.getInt(6);
-                    data.isDB = true;
-                    mData.add(data);
+
+            try{
+                if (c != null) {
+                    while (c.moveToNext()) {
+                        Data data = new Data();
+                        data.tempYear = c.getInt(1);
+                        data.tempMonth = c.getInt(2);
+                        data.tempDay = c.getInt(3);
+                        data.tempContent = c.getString(4);
+                        data.tempWeek = c.getInt(5);
+                        data.weather = c.getInt(6);
+                        data.isDB = true;
+                        mData.add(data);
+
+                    }
 
                 }
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }finally {
                 c.close();
             }
+
 
 
             mListView.post(new Runnable() {
@@ -438,13 +465,22 @@ public class MainActivity extends Activity {
                     String[] columns = new String[]{"content","weather"};
                     String[] temp = {"" + data.tempYear, "" + data.tempMonth, "" + i};
                     Cursor c = mTimeDB.query(columns, "year = ? AND month =? AND day = ? ", temp, null, null, null);
-                    if (c != null && c.getCount() != 0) {
-                        data.isDB = true;
-                        c.moveToFirst();
-                        data.tempContent = c.getString(0);
-                        data.weather =c.getInt(1);
+
+
+                    try{
+                        if (c != null && c.getCount() != 0) {
+                            data.isDB = true;
+                            c.moveToFirst();
+                            data.tempContent = c.getString(0);
+                            data.weather =c.getInt(1);
+                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }finally {
+                        c.close();
                     }
-                    c.close();
+
+
 
 
                     mData.add(0, data);
@@ -658,7 +694,7 @@ public class MainActivity extends Activity {
         lin.setVisibility(View.VISIBLE);
     }   //하단 월 horizontalscroll이 visible 됐을대
 
-
+//////////////////////////////////////////////////////////////////////////////////////////////
     private void isAvailable() {
         if((boolean)MyAccount.getValue(this, "AVAILABLE")) {
 
@@ -687,18 +723,13 @@ public class MainActivity extends Activity {
             MyAccount.setFontStartTime(this, "");
         }
 
-/*
-        int ONEMIN = 1000 * 60;
-        if(diff > ONEMIN) {
-            MyAccount.setFontAvailable(this, false);
-            MyAccount.setFont(this, "hankyoreh");
-            MyAccount.setFontStartTime(this, "");
-
-        }
-*/
     }
 
+//////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -707,6 +738,8 @@ public class MainActivity extends Activity {
         @Override
         public void onUnityAdsReady(String s) {
             // 광고 로드 되었을 때
+
+
             Log.d("ad_status", "on Ready!");
         }
 
@@ -733,6 +766,7 @@ public class MainActivity extends Activity {
 
 
     }
+
 
 
 }

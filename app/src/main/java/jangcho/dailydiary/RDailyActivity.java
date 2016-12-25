@@ -68,14 +68,22 @@ public class RDailyActivity extends Activity {
 
         String[] temp1 = {""+year,""+month,""+day};
         Cursor c = mNewsDB.query(columns1 ,"year = ? AND month =? AND day = ? ",temp1,null,null,null);
-        if(c != null && c.getCount()!=0){
-            inews.setVisibility(View.VISIBLE);
-            }else{
-            inews.setVisibility(View.GONE);
 
+        try{
+            if(c != null && c.getCount()!=0){
+                inews.setVisibility(View.VISIBLE);
+            }else{
+                inews.setVisibility(View.GONE);
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            c.close();
         }
 
-        c.close();
+
+
 
         ////////////DB 존재하면 내용을 append
         String[] columns = new String[]{"content","weather"};
@@ -83,16 +91,24 @@ public class RDailyActivity extends Activity {
 
         String[] temp = {""+year,""+month,""+day};
         Cursor c1 = mTimeDB.query(columns ,"year = ? AND month =? AND day = ? ",temp,null,null,null);
-        if(c1 != null && c1.getCount()!=0){
-            c1.moveToFirst();
-            textdaily.setText(c1.getString(0));
-            weather1 = c1.getInt(1);
 
-        }else{
+        try{
+            if(c1 != null && c1.getCount()!=0){
+                c1.moveToFirst();
+                textdaily.setText(c1.getString(0));
+                weather1 = c1.getInt(1);
 
+            }else{
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            c1.close();
         }
+
         /////////////////////////////////////////
-        c1.close();
+
         switch(weather1){
             case 0: weather.setBackgroundResource(R.drawable.sunny_animation); break;
             case 1: weather.setBackgroundResource(R.drawable.cloud_animation); break;
@@ -149,26 +165,35 @@ public class RDailyActivity extends Activity {
 
                 String[] temp = {""+year,""+month,""+day};
                 Cursor c = mNewsDB.query(columns ,"year = ? AND month =? AND day = ? ",temp,null,null,null);
-                if(c != null && c.getCount()!=0){
 
-                    final Intent intent = new Intent(getApplicationContext(), NewsActivity.class);
+                try{
+                    if(c != null && c.getCount()!=0){
 
-                    intent.putExtra("year", year);
-                    intent.putExtra("month", month);
-                    intent.putExtra("day", day);
-                    intent.putExtra("week", week);
+                        final Intent intent = new Intent(getApplicationContext(), NewsActivity.class);
 
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            startActivity(intent);
-                        }
-                    }, 250);
+                        intent.putExtra("year", year);
+                        intent.putExtra("month", month);
+                        intent.putExtra("day", day);
+                        intent.putExtra("week", week);
+
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                startActivity(intent);
+                            }
+                        }, 250);
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }finally {
+                    c.close();
                 }
 
 
-                c.close();
+
+
+
 
                 break;
 
@@ -207,6 +232,8 @@ public class RDailyActivity extends Activity {
     public void onStop(){
         super.onStop();
     }
+
+
 
 }
 

@@ -27,7 +27,9 @@ public class MyAccount {
             return getPrefs(context).getString(key, "nanum");
         } else if(key.equals("REVIEW")) {
             return getPrefs(context).getInt(key, 0);
-        } else {
+        }
+
+    else {
             return getPrefs(context).getString(key, "");
         }
 

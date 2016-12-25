@@ -84,13 +84,13 @@ public class DotBaseAdapter extends BaseAdapter{
 
             String mweek = "";
             switch(mData.get(position).tempWeek){
-                case 1: mweek = "Sun"; content_week.setTextColor(Color.parseColor("#ff0000")); break;
+                case 1: mweek = "Sun"; content_week.setTextColor(Color.parseColor("#ff0000")); content_day.setTextColor(Color.parseColor("#ff0000")); break;
                 case 2: mweek = "Mon"; break;
                 case 3: mweek = "Tue"; break;
                 case 4: mweek = "Wed"; break;
                 case 5: mweek = "Thu"; break;
                 case 6: mweek = "Fri"; break;
-                case 7: mweek = "Sat"; break;
+                case 7: mweek = "Sat"; content_week.setTextColor(Color.parseColor("#0000ff")); content_day.setTextColor(Color.parseColor("#0000ff"));break;
 
 
             }

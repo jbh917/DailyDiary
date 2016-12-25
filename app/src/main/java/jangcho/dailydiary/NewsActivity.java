@@ -66,15 +66,23 @@ public class NewsActivity extends Activity {
 
         Cursor c = mNewsDB.query(columns ,"year = ? AND month =? AND day = ? ",temp,null,null,null);
 
-        if(c != null && c.getCount()!=0){
+        try{
+            if(c != null && c.getCount()!=0){
 
-            c.moveToFirst();
-            news=c.getString(0);
-            hyper = c.getString(1);
+                c.moveToFirst();
+                news=c.getString(0);
+                hyper = c.getString(1);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            c.close();
         }
 
 
-        c.close();
+
+
+
 
         anews = news.split("@");
         ahyper = hyper.split("@");
@@ -127,5 +135,6 @@ public class NewsActivity extends Activity {
 
 
     }
+
 
 }
